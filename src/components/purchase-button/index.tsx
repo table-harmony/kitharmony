@@ -1,21 +1,29 @@
 "use client";
 
-import { useTransition } from "react";
+import React, { useTransition } from "react";
 
-import { deleteUserAction } from "./actions";
+import { purchaseAction } from "./actions";
 
 import { useToast } from "@/components/ui/use-toast";
 import { LoaderButton } from "@/components/ui/loader-button";
 
-import { Trash2Icon } from "lucide-react";
+import { ButtonProps } from "@/components/ui/button";
 
-export const DeleteForm = () => {
+type PurchaseButtonProps = ButtonProps & {
+  repo: string;
+  children: React.ReactNode;
+};
+
+export const PurchaseButton = React.forwardRef<
+  HTMLButtonElement,
+  PurchaseButtonProps
+>(({ repo, children, ...props }, ref) => {
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
 
   const onSubmit = () => {
     startTransition(() => {
-      deleteUserAction()
+      purchaseAction(repo)
         .then((data) => {
           if (data?.error)
             toast({ variant: "destructive", description: data.error });
@@ -31,16 +39,12 @@ export const DeleteForm = () => {
   };
 
   return (
-    <form action={onSubmit} className="space-y-2">
-      <LoaderButton
-        isLoading={isPending}
-        icon={Trash2Icon}
-        type="submit"
-        className="w-full"
-        variant="destructive"
-      >
-        Delete
+    <form action={onSubmit}>
+      <LoaderButton isLoading={isPending} ref={ref} type="submit" {...props}>
+        {children}
       </LoaderButton>
     </form>
   );
-};
+});
+
+PurchaseButton.displayName = "PurchaseButton";

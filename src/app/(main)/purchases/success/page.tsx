@@ -7,12 +7,18 @@ export default function SuccessPage() {
       <header className="text-center">
         <h1 className="font-medium text-3xl">Purchase Successful</h1>
         <p className="text-sm text-muted-foreground">
-          Click below to view your purchase
+          We have sent you an{" "}
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/notifications"
+            className="font-bold underline underline-offset-4"
+          >
+            Invitation
+          </Link>{" "}
+          to our starter kit
         </p>
       </header>
-      <Button variant="secondary" className="w-full" asChild>
-        <Link href="/purchases">View purchases</Link>
-      </Button>
     </div>
   );
 }

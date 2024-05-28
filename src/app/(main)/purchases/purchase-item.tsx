@@ -31,10 +31,10 @@ export function PurchaseItem({
       >
         {repoName}
       </Link>
-      <p className="text-sm text-muted-foreground">{id}</p>
+      <p className="text-sm text-muted-foreground">Purchase ID: {id}</p>
       <div className="flex justify-between items-center">
         <span className="sr-only">Published On</span>
-        <p className="text-xs font-medium hidden md:flex items-center gap-1">
+        <p className="text-xs font-medium items-center gap-1">
           {createdAt.toLocaleDateString()}
         </p>
         <Link

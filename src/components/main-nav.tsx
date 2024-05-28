@@ -4,16 +4,14 @@ import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
 
-import { FolderGit } from "lucide-react";
+import { FolderIcon } from "lucide-react";
 
 export function MainNav() {
   return (
-    <div className="mr-4 hidden md:flex">
+    <div className="mr-4 flex gap-2">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <FolderGit className="h-6 w-6" />
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
-        </span>
+        <FolderIcon className="h-6 w-6" />
+        <span className="font-bold">{siteConfig.name}</span>
       </Link>
     </div>
   );

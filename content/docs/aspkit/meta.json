@@ -1,0 +1,15 @@
+{
+  "title": "aspkit",
+  "root": true,
+  "pages": [
+    "---Guide---",
+    "index",
+    "---Installation---",
+    "...installation",
+    "---Database---",
+    "...database",
+    "---MVC---",
+    "...mvc",
+    "[Github](https://github.com/table-harmony/aspkit)"
+  ]
+}

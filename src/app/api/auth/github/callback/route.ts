@@ -27,6 +27,15 @@ export async function GET(request: Request): Promise<Response> {
     });
 
     if (existingUser) {
+      await db.user.update({
+        data: {
+          username: githubUser.login,
+          picture: githubUser.avatar_url,
+          email: githubUser.email,
+        },
+        where: { id: existingUser.id },
+      });
+
       const session = await lucia.createSession(existingUser.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
       cookies().set(

@@ -1,6 +1,9 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 
 import { validateRequest } from "@/lib/auth";
+
+import { Skeleton } from "@/components/ui/skeleton";
 import { PurchasesList } from "./purchases-list";
 
 export default async function PurchasesPage() {
@@ -16,7 +19,9 @@ export default async function PurchasesPage() {
           View and manage your purchases
         </p>
       </header>
-      <PurchasesList />
+      <Suspense fallback={<Skeleton className="md:max-w-lg h-[150px]" />}>
+        <PurchasesList />
+      </Suspense>
     </div>
   );
 }
