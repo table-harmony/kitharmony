@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { UserInfo } from "@/components/user-info";
 import { DeleteForm } from "./delete-form";
+import { Button } from "@/components/ui/button";
 
 export default async function SettingsPage() {
   return (
