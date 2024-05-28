@@ -21,6 +21,7 @@ model User {
   github_id     Int      @unique
 
   sessions     Session[]
+  purchases    Purchase[]
 }
 
 model Session {
@@ -28,5 +29,25 @@ model Session {
   userId    String   @db.ObjectId
   expiresAt DateTime
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Repo { 
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   @unique
+  link      String   @unique
+
+  purchases Purchase[]
+}
+
+model Purchase {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId 
+  userId    String   @db.ObjectId
+  repoId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade) 
+  repo      Repo     @relation(references: [id], fields: [repoId], onDelete: Cascade) 
+
+  @@unique([userId, repoId])
 }
 
