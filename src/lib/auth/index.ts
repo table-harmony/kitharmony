@@ -16,7 +16,7 @@ export const lucia = new Lucia(adapter, {
   sessionCookie: {
     expires: false,
     attributes: {
-      secure: false,
+      secure: true,
     },
   },
   getUserAttributes: (attributes) => {
