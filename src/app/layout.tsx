@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ContextProvider>
           <div className="relative flex min-h-screen flex-col bg-background">
-            {children}
+            \ {children}
           </div>
         </ContextProvider>
       </body>
