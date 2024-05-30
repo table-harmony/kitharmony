@@ -18,8 +18,8 @@ model User {
   username     String
   picture      String
   email        String?
-  github_id     Int      @unique
-
+  github_id    Int      @unique
+  
   sessions     Session[]
   purchases    Purchase[]
 }
@@ -50,4 +50,5 @@ model Purchase {
 
   @@unique([userId, repoId])
 }
+
 

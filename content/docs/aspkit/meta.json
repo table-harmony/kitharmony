@@ -4,12 +4,7 @@
   "pages": [
     "---Guide---",
     "index",
-    "---Installation---",
-    "...installation",
-    "---Database---",
-    "...database",
-    "---MVC---",
-    "...mvc",
-    "[Github](https://github.com/table-harmony/aspkit)"
+    "...",
+    "[GitHub](https://github.com/table-harmony/aspkit)"
   ]
 }

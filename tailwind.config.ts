@@ -7,6 +7,7 @@ const config = {
   content: [
     "./components/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
     "./content/**/*.mdx",
     "./mdx-components.tsx",
     "./node_modules/fumadocs-ui/dist/**/*.js",
