@@ -1,13 +1,13 @@
 import db from "@/db";
 
 import { notFound, redirect } from "next/navigation";
-import type { Metadata } from "next";
 
 import { validateRequest } from "@/lib/auth";
 
+import { createMetadata } from "@/utils/metadata";
 import { getPage, getPages } from "@/utils/source";
 import { DocsPage, DocsBody } from "fumadocs-ui/page";
-import { createMetadata } from "@/utils/metadata";
+import { ExternalLinkIcon } from "lucide-react";
 
 export default async function Page({
   params,
@@ -23,11 +23,33 @@ export default async function Page({
   }
 
   const MDX = page.data.exports.default;
+  const path = `content/docs/${page.file.path}`;
 
   return (
-    <DocsPage toc={page.data.exports.toc}>
+    <DocsPage
+      toc={page.data.exports.toc}
+      lastUpdate={page.data.exports.lastModified}
+      tableOfContent={{
+        enabled: page.data.toc,
+        footer: (
+          <a
+            href={`https://github.com/table-harmony/kitharmony/blob/master/${path}`}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+          >
+            Edit on Github <ExternalLinkIcon className="size-3" />
+          </a>
+        ),
+      }}
+    >
+      <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
+        {page.data.title}
+      </h1>
+      <p className="mb-8 text-lg text-muted-foreground">
+        {page.data.description}
+      </p>
       <DocsBody>
-        <h1>{page.data.title}</h1>
         <MDX />
       </DocsBody>
     </DocsPage>
