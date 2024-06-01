@@ -10,7 +10,7 @@ export function SiteFooter() {
   return (
     <footer className="z-10 border-t border-border py-8 flex flex-col relative">
       <div className="mx-auto container px-4 lg:px-20">
-        <section className="flex space-y-2 items-center justify-center flex-col">
+        <section className="flex space-y-2 flex-col items-center">
           <Link href="/" className="font-medium text-2xl">
             {siteConfig.name}
           </Link>
@@ -40,7 +40,7 @@ export function SiteFooter() {
             </Button>
           </div>
         </section>
-        <section className="mt-16 flex flex-col-reverse md:flex-row md:justify-between items-center border-t border-border pt-4 md:pt-8 sm:mt-20 lg:mt-24">
+        <section className="mt-8 flex flex-col-reverse md:flex-row md:justify-between items-center border-t border-border pt-4 md:pt-8">
           <p className="text-balance text-sm leading-loose text-muted-foreground w-full text-left mt-4 md:mt-0">
             Built by{" "}
             <Link

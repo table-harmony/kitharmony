@@ -1,4 +1,4 @@
-import db from "@/db";
+import { createUser, getUserByGithub, updateUser } from "@/infrastructure/user";
 
 import { cookies } from "next/headers";
 import { github, lucia } from "@/lib/auth";
@@ -22,18 +22,14 @@ export async function GET(request: Request): Promise<Response> {
     });
     const githubUser: GitHubUser = await response.json();
 
-    const existingUser = await db.user.findUnique({
-      where: { github_id: githubUser.id },
-    });
+    const existingUser = await getUserByGithub({ github_id: githubUser.id });
 
     if (existingUser) {
-      await db.user.update({
-        data: {
-          username: githubUser.login,
-          picture: githubUser.avatar_url,
-          email: githubUser.email,
-        },
-        where: { id: existingUser.id },
+      await updateUser(existingUser.id, {
+        username: githubUser.login,
+        picture: githubUser.avatar_url,
+        email: githubUser.email,
+        github_id: githubUser.id,
       });
 
       const session = await lucia.createSession(existingUser.id, {});
@@ -51,13 +47,11 @@ export async function GET(request: Request): Promise<Response> {
       });
     }
 
-    const user = await db.user.create({
-      data: {
-        github_id: githubUser.id,
-        username: githubUser.login,
-        picture: githubUser.avatar_url,
-        email: githubUser.email,
-      },
+    const user = await createUser({
+      github_id: githubUser.id,
+      username: githubUser.login,
+      picture: githubUser.avatar_url,
+      email: githubUser.email,
     });
 
     const session = await lucia.createSession(user.id, {});

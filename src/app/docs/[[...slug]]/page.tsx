@@ -1,4 +1,5 @@
-import db from "@/db";
+import { getRepoByName } from "@/infrastructure/repo";
+import { getPurchaseByUserAndRepo } from "@/infrastructure/purchase";
 
 import { notFound, redirect } from "next/navigation";
 
@@ -63,17 +64,13 @@ async function getPurchaseFromParams(params: { slug?: string[] }) {
 
   const kit = params.slug?.at(0);
 
-  const repo = await db.repo.findUnique({ where: { name: kit } });
+  const repo = await getRepoByName({ name: kit ?? "" });
 
   if (!repo) redirect("/");
 
-  const purchase = await db.purchase.findUnique({
-    where: {
-      userId_repoId: {
-        userId: user.id,
-        repoId: repo.id,
-      },
-    },
+  const purchase = await getPurchaseByUserAndRepo({
+    userId: user.id,
+    repoId: repo.id,
   });
 
   if (!purchase) redirect("/");

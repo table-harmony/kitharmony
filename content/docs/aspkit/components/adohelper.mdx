@@ -1,0 +1,88 @@
+---
+title: Adohelper
+description: Data access layer
+---
+
+In our project, we will create a folder DAL (Data access layer).
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+<Files>
+  <Folder name="DAL" defaultOpen>
+    <File name="adohelper.cs" />
+  </Folder>
+  <Folder name="Model">
+    <File name="User.cs" />
+  </Folder>
+</Files>
+
+```csharp title="AdoHelper.cs"
+public class AdoHelper
+{
+
+}
+```
+
+## Usage
+
+This class is for directly connecting to our SQL database
+
+## Database connection
+
+In order to connect to the database we will add a property which is the name of the database.
+
+```csharp
+private static string db = "database1";
+```
+
+We will also add a function that returns us a sqlConnection to the database:
+
+```csharp title="adohelper.cs"
+public static SqlConnection ConnectToDb() {
+  string path = HttpContext.Current.Server.MapPath($"/App_Data/{db}");
+  string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = " + path + "; Integrated Security = True"
+
+  SqlConnection conn = new SqlConnection(connectionString);
+  return conn;
+}
+```
+
+## Data fetching
+
+In order to fetch data from the database we will create the following functions:
+
+```csharp title="adohelper.cs"
+public static DataTable GetDataTable(string sql, object parameters, bool isSp = false) {
+  SqlConnection conn = ConnectToDb();
+
+  SqlCommand command = new SqlCommand(sql, conn);
+  if (isSp)  command.CommandType = CommandType.StoredProcedure;
+
+  // Adding Query paramters to command
+  foreach (var property in parameters.GetType().GetProperties())
+    command.Parameters.AddWithValue($"@{property.Name}", property.GetValue(parameters));
+
+  SqlDataAdapter tableAdapter = new SqlDataAdapter(command);
+  DataTable dt = new DataTable();
+
+  try {
+      conn.Open();
+      tableAdapter.Fill(dt);
+  }
+  catch (Exception e) {
+  }
+  finally {
+      conn.Close();
+  }
+
+  return dt;
+}
+```
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+<Callout title="Server only" type="warn">
+
+You cannot use any of these functions in the controller or view.
+
+</Callout>

@@ -9,7 +9,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <SiteHeader />
-      {children}
+      <main className="flex-1">{children}</main>
       <SiteFooter />
     </>
   );

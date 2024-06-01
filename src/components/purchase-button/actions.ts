@@ -1,6 +1,10 @@
 "use server";
 
-import db from "@/db";
+import {
+  createPurchase,
+  getPurchaseByUserAndRepo,
+} from "@/infrastructure/purchase";
+import { getRepoByName } from "@/infrastructure/repo";
 
 import { redirect } from "next/navigation";
 
@@ -14,27 +18,18 @@ export async function purchaseAction(repoName: string) {
 
   if (!user) return { error: "Unauthorized!" };
 
-  const repo = await db.repo.findUnique({ where: { name: repoName } });
+  const repo = await getRepoByName({ name: repoName });
 
   if (!repo) return { error: "Repo not found!" };
 
-  const existingPurchase = await db.purchase.findUnique({
-    where: {
-      userId_repoId: {
-        userId: user.id,
-        repoId: repo.id,
-      },
-    },
+  const existingPurchase = await getPurchaseByUserAndRepo({
+    userId: user.id,
+    repoId: repo.id,
   });
 
   if (existingPurchase) return redirect("/purchases");
 
-  await db.purchase.create({
-    data: {
-      userId: user.id,
-      repoId: repo.id,
-    },
-  });
+  await createPurchase({ userId: user.id, repoId: repo.id });
 
   await addCollaborator(user.username, repo.name);
 
