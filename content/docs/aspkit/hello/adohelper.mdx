@@ -1,0 +1,118 @@
+---
+title: AdoHelper
+description: Data Access Layer
+icon: Database
+---
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+<Files>
+  <Folder name="DAL" defaultOpen>
+    <File name="AdoHelper.cs" />
+  </Folder>
+</Files>
+
+## Introduction
+
+The `AdoHelper` class is a helper class for connecting to a SQL Server database and executing queries. It is part of the data access layer in the project.
+
+```csharp title="AdoHelper.cs"
+using System;
+using System.Data;
+using System.Web;
+using System.Data.SqlClient;
+
+public class AdoHelper
+{
+  private static string db = "database1";
+}
+```
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+<Callout title="Usage" type="warn">
+  The AdoHelper class methods should be used only in the Model layer.
+</Callout>
+
+### Terminology
+
+For a better understanding, here are some common terminologies you should know:
+
+**SqlConnection:** Represents a connection to a SQL Server database.
+
+**SqlCommand:** Represents a Transact-SQL statement or stored procedure to execute against a SQL Server database.
+
+**DataTable:** Represents an in-memory table of data.
+
+**Stored Procedure:** A precompiled collection of Transact-SQL statements stored under a name and processed as a unit.
+
+## Methods
+
+These are the methods of the AdoHelper helper class:
+
+### ConnectToDb
+
+Creates and returns a connection to the database.
+
+```csharp title="AdoHelper.cs"
+public static SqlConnection ConnectToDb()
+{
+    string path = HttpContext.Current.Server.MapPath($"/App_Data/{db}");
+    string connectionString = @"Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + path + "; Integrated Security = True";
+
+    SqlConnection conn = new SqlConnection(connectionString);
+    return conn;
+}
+```
+
+### GetDataTable
+
+Executes a SQL query or stored procedure and returns the result as a DataTable.
+
+import { TypeTable } from "fumadocs-ui/components/type-table";
+
+<TypeTable
+  type={{
+    sql: {
+      description: "The SQL query to execute.",
+      type: "string",
+    },
+    parameters: {
+      description: "The parameters for the SQL query.",
+      type: "object",
+    },
+    isSp: {
+      description: "Indicates whether the query is a stored procedure.",
+      type: "boolean",
+      default: "false",
+    },
+  }}
+/>
+
+```csharp title="AdoHelper.cs"
+public static DataTable GetDataTable(string sql, object parameters, bool isSp = false)
+{
+    SqlConnection conn = ConnectToDb();
+
+    SqlCommand command = new SqlCommand(sql, conn);
+    if (isSp) command.CommandType = CommandType.StoredProcedure;
+
+    foreach (var property in parameters.GetType().GetProperties())
+        command.Parameters.AddWithValue($"@{property.Name}", property.GetValue(parameters));
+
+    SqlDataAdapter tableAdapter = new SqlDataAdapter(command);
+    DataTable dt = new DataTable();
+
+    try {
+        conn.Open();
+        tableAdapter.Fill(dt);
+    }
+    catch (Exception e) {
+    }
+    finally {
+        conn.Close();
+    }
+
+    return dt;
+}
+```

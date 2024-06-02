@@ -22,7 +22,7 @@ export function PurchaseItem({
   createdAt,
 }: PurchaseItemProps) {
   return (
-    <article className="flex flex-col gap-3 border-border border-b py-3">
+    <article className="flex flex-col gap-3 border-b border-border py-3">
       <Link
         href={link}
         target="_blank"
@@ -32,16 +32,16 @@ export function PurchaseItem({
         {repoName}
       </Link>
       <p className="text-sm text-muted-foreground">Purchase ID: {id}</p>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <span className="sr-only">Published On</span>
-        <p className="text-xs font-medium items-center gap-1">
+        <p className="items-center gap-1 text-xs font-medium">
           {createdAt.toLocaleDateString()}
         </p>
         <Link
           href={`/docs/${repoName}`}
           className={cn(
             buttonVariants({ variant: "link" }),
-            "py-0 text-xs font-medium"
+            "py-0 text-xs font-medium",
           )}
         >
           To docs →

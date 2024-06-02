@@ -8,6 +8,7 @@ import { validateRequest } from "@/lib/auth";
 import { createMetadata } from "@/utils/metadata";
 import { getPage, getPages } from "@/utils/source";
 import { DocsPage, DocsBody } from "fumadocs-ui/page";
+import { RollButton } from "fumadocs-ui/components/roll-button";
 import { ExternalLinkIcon } from "lucide-react";
 
 export default async function Page({
@@ -44,6 +45,7 @@ export default async function Page({
         ),
       }}
     >
+      <RollButton />
       <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
         {page.data.title}
       </h1>

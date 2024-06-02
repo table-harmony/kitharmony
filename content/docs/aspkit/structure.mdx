@@ -1,0 +1,29 @@
+---
+title: File structure
+description: Project's layout and design.
+icon: Files
+---
+
+## MVC
+
+In this project we are going to use the [MVC](https://youtube.com) protocol (Model - View - Controller).
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+<Files>
+  <Folder name="AppData">
+    <File name="Database1.mdf" />
+  </Folder>
+  <Folder name="DAL">
+    <File name="adohelper.cs" />
+  </Folder>
+  <Folder name="Model">
+    <File name="User.cs" />
+  </Folder>
+  <Folder name="Controller">
+    <File name="User.cs" />
+  </Folder>
+  <Folder name="View">
+    <File name="Home.aspx" />
+  </Folder>
+</Files>

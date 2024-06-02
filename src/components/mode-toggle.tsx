@@ -9,7 +9,7 @@ export function ModeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex space-x-2 items-center rounded-full border p-1">
+    <div className="flex items-center space-x-2 rounded-full border p-1">
       <button
         onClick={() => setTheme(Theme.LIGHT)}
         className={cn("rounded-full p-1.5", theme === "light" && "bg-muted")}

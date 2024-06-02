@@ -8,8 +8,8 @@ import { GithubIcon } from "lucide-react";
 export function MainSection() {
   return (
     <section>
-      <div className="container lg:px-20 pt-12 pb-24 md:py-20 space-y-10 flex flex-col items-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance text-center">
+      <div className="container flex flex-col items-center space-y-10 pb-24 pt-12 md:py-20 lg:px-20">
+        <h1 className="text-balance text-center text-4xl font-bold md:text-5xl lg:text-6xl">
           {siteConfig.description}
         </h1>
         <Button className="w-72 rounded-full" asChild>

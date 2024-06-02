@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 
 export default function SuccessPage() {
   return (
-    <div className="container relative md:max-w-lg space-y-6 py-2 md:py-20">
+    <div className="container relative space-y-6 py-2 md:max-w-lg md:py-20">
       <header className="text-center">
-        <h1 className="font-medium text-3xl">Purchase Successful</h1>
+        <h1 className="text-3xl font-medium">Purchase Successful</h1>
         <p className="text-sm text-muted-foreground">
           We have sent you an{" "}
           <Link

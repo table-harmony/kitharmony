@@ -35,18 +35,18 @@ export async function UserDropdown() {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/purchases">
-            <CreditCardIcon className="h-4 w-4 mr-2" /> Purchases
+            <CreditCardIcon className="mr-2 h-4 w-4" /> Purchases
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/settings">
-            <SettingsIcon className="h-4 w-4 mr-2" /> Settings
+            <SettingsIcon className="mr-2 h-4 w-4" /> Settings
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/auth/logout">
-            <LogOutIcon className="h-4 w-4 mr-2" /> Logout
+            <LogOutIcon className="mr-2 h-4 w-4" /> Logout
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>

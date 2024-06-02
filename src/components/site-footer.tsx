@@ -8,10 +8,10 @@ import { GithubIcon, LinkedinIcon } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="z-10 border-t border-border py-8 flex flex-col relative">
-      <div className="mx-auto container px-4 lg:px-20">
-        <section className="flex space-y-2 flex-col items-center">
-          <Link href="/" className="font-medium text-2xl">
+    <footer className="relative z-10 flex flex-col border-t border-border py-8">
+      <div className="container mx-auto px-4 lg:px-20">
+        <section className="flex flex-col items-center space-y-2">
+          <Link href="/" className="text-2xl font-medium">
             {siteConfig.name}
           </Link>
           <p className="max-w-xs text-sm text-muted-foreground">
@@ -40,8 +40,8 @@ export function SiteFooter() {
             </Button>
           </div>
         </section>
-        <section className="mt-8 flex flex-col-reverse md:flex-row md:justify-between items-center border-t border-border pt-4 md:pt-8">
-          <p className="text-balance text-sm leading-loose text-muted-foreground w-full text-left mt-4 md:mt-0">
+        <section className="mt-8 flex flex-col-reverse items-center border-t border-border pt-4 md:flex-row md:justify-between md:pt-8">
+          <p className="mt-4 w-full text-balance text-left text-sm leading-loose text-muted-foreground md:mt-0">
             Built by{" "}
             <Link
               href="https://tableharmony.io"
@@ -61,7 +61,7 @@ export function SiteFooter() {
               GitHub.
             </Link>
           </p>
-          <div className="w-full justify-start flex md:justify-end">
+          <div className="flex w-full justify-start md:justify-end">
             <ModeToggle />
           </div>
         </section>
