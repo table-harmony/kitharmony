@@ -32,10 +32,12 @@ model Session {
 }
 
 model Repo { 
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  link      String   @unique
-
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
+  link        String   @unique
+  description String
+  picture     String
+  
   purchases Purchase[]
 }
 

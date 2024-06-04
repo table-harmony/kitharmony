@@ -1,9 +1,17 @@
-import { MainSection } from "./sections";
+import {
+  FaqSection,
+  JoinSection,
+  MainSection,
+  StaterKitsSection,
+} from "./sections";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col relative">
+    <div className="relative flex flex-col">
       <MainSection />
+      <StaterKitsSection />
+      <FaqSection />
+      <JoinSection />
     </div>
   );
 }
