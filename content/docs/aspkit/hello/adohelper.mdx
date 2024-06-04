@@ -5,6 +5,8 @@ icon: Database
 ---
 
 import { File, Folder, Files } from "fumadocs-ui/components/files";
+import { Callout } from "fumadocs-ui/components/callout";
+import { TypeTable } from "fumadocs-ui/components/type-table";
 
 <Files>
   <Folder name="DAL" defaultOpen>
@@ -24,11 +26,9 @@ using System.Data.SqlClient;
 
 public class AdoHelper
 {
-  private static string db = "database1";
+    public static string Path { get; } = "/App_Data/Database1.mdf";
 }
 ```
-
-import { Callout } from "fumadocs-ui/components/callout";
 
 <Callout title="Usage" type="warn">
   The AdoHelper class methods should be used only in the Model layer.
@@ -42,7 +42,7 @@ For a better understanding, here are some common terminologies you should know:
 
 **SqlCommand:** Represents a Transact-SQL statement or stored procedure to execute against a SQL Server database.
 
-**DataTable:** Represents an in-memory table of data.
+**DataSet:** Represents an in-memory cache of data.
 
 **Stored Procedure:** A precompiled collection of Transact-SQL statements stored under a name and processed as a unit.
 
@@ -57,19 +57,17 @@ Creates and returns a connection to the database.
 ```csharp title="AdoHelper.cs"
 public static SqlConnection ConnectToDb()
 {
-    string path = HttpContext.Current.Server.MapPath($"/App_Data/{db}");
-    string connectionString = @"Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + path + "; Integrated Security = True";
+    string path = HttpContext.Current.Server.MapPath(Path);
+    string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = " + path + "; Integrated Security = True";
 
     SqlConnection conn = new SqlConnection(connectionString);
     return conn;
 }
 ```
 
-### GetDataTable
+### GetDataSet
 
-Executes a SQL query or stored procedure and returns the result as a DataTable.
-
-import { TypeTable } from "fumadocs-ui/components/type-table";
+Executes a SQL query or stored procedure and returns the result as a DataSet.
 
 <TypeTable
   type={{
@@ -80,6 +78,7 @@ import { TypeTable } from "fumadocs-ui/components/type-table";
     parameters: {
       description: "The parameters for the SQL query.",
       type: "object",
+      default: "null",
     },
     isSp: {
       description: "Indicates whether the query is a stored procedure.",
@@ -90,22 +89,23 @@ import { TypeTable } from "fumadocs-ui/components/type-table";
 />
 
 ```csharp title="AdoHelper.cs"
-public static DataTable GetDataTable(string sql, object parameters, bool isSp = false)
+public static DataSet GetDataSet(string sql, object parameters = null, bool isSp = false)
 {
     SqlConnection conn = ConnectToDb();
 
     SqlCommand command = new SqlCommand(sql, conn);
-    if (isSp) command.CommandType = CommandType.StoredProcedure;
+    if (isSp)  command.CommandType = CommandType.StoredProcedure;
 
+    // Adding paramters to command
     foreach (var property in parameters.GetType().GetProperties())
         command.Parameters.AddWithValue($"@{property.Name}", property.GetValue(parameters));
 
-    SqlDataAdapter tableAdapter = new SqlDataAdapter(command);
-    DataTable dt = new DataTable();
+    SqlDataAdapter adapter = new SqlDataAdapter(command);
+    DataSet res = new DataSet();
 
     try {
         conn.Open();
-        tableAdapter.Fill(dt);
+        adapter.Fill(res);
     }
     catch (Exception e) {
     }
@@ -113,6 +113,6 @@ public static DataTable GetDataTable(string sql, object parameters, bool isSp = 
         conn.Close();
     }
 
-    return dt;
+    return res;
 }
 ```
