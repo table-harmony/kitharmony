@@ -38,7 +38,7 @@ declare module "lucia" {
 
 export const github = new GitHub(
   env.GITHUB_CLIENT_ID,
-  env.GITHUB_CLIENT_SECRET
+  env.GITHUB_CLIENT_SECRET,
 );
 
 export const validateRequest = cache(
@@ -61,7 +61,7 @@ export const validateRequest = cache(
         cookies().set(
           sessionCookie.name,
           sessionCookie.value,
-          sessionCookie.attributes
+          sessionCookie.attributes,
         );
       }
       if (!result.session) {
@@ -69,10 +69,10 @@ export const validateRequest = cache(
         cookies().set(
           sessionCookie.name,
           sessionCookie.value,
-          sessionCookie.attributes
+          sessionCookie.attributes,
         );
       }
     } catch {}
     return result;
-  }
+  },
 );

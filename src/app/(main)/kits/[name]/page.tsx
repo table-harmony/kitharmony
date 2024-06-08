@@ -1,9 +1,7 @@
-import { PurchaseButton } from "@/components/purchase-button";
 import { SignedIn, SignedOut } from "@/components/signed";
-import { Button } from "@/components/ui/button";
 import { getRepoByName, getRepos } from "@/infrastructure/repo";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PurchaseForm } from "./form";
 
 export async function generateStaticParams() {
   const repos = await getRepos();
@@ -41,14 +39,14 @@ export default async function RoomPage({
     <div className="container flex flex-col space-y-12 pb-24 pt-12 md:py-20 lg:px-20">
       <div className="flex flex-col items-center space-y-5">
         <h1 className="text-balance text-center text-xl font-bold md:text-3xl lg:text-4xl">
-          {repo.name}
+          {repo.name.toUpperCase()}
         </h1>
         <p className="max-w-[750px] text-center text-sm text-muted-foreground">
           {repo.description}
         </p>
       </div>
       <SignedIn>
-        <PurchaseButton repo={repo.name}>Purchase</PurchaseButton>
+        <PurchaseForm repoName={repo.name} />
       </SignedIn>
       <SignedOut>Login in order to purchase this starter kit</SignedOut>
     </div>

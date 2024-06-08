@@ -1,16 +1,20 @@
-import { getPurchasesByUser } from "@/infrastructure/purchase";
+import db from "@/db";
+
+import { redirect } from "next/navigation";
 
 import { validateRequest } from "@/lib/auth";
 
 import { PurchaseItem } from "./purchase-item";
-import { redirect } from "next/navigation";
 
 export async function PurchasesList() {
   const { user } = await validateRequest();
 
   if (!user) redirect("/");
 
-  const purchases = await getPurchasesByUser({ userId: user.id });
+  const purchases = await db.purchase.findMany({
+    where: { userId: user.id },
+    include: { repo: true },
+  });
 
   return (
     <>

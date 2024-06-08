@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { PurchaseButton } from "./purchase-button";
 import {
   Card,
   CardContent,
@@ -7,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "@/components/ui/card";
 import Image from "next/image";
 
 interface RepoCardProps {
@@ -22,7 +21,7 @@ export function RepoCard({ id, name, description, picture }: RepoCardProps) {
     <Card className="min-w-fit border p-8">
       <Image alt="repo" src={picture} width="50" height="50" />
       <CardHeader>
-        <CardTitle>{name}</CardTitle>
+        <CardTitle>{name.toUpperCase()}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent></CardContent>
