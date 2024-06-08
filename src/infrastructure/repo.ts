@@ -27,6 +27,14 @@ export async function getRepoByName(data: { name: string }) {
   return toDtoMapper(repo);
 }
 
+export async function getRepo(data: { id: string }) {
+  const repo = await db.repo.findUnique({ where: { id: data.id } });
+
+  if (!repo) return undefined;
+
+  return toDtoMapper(repo);
+}
+
 export async function getRepos() {
   const repos = await db.repo.findMany();
 

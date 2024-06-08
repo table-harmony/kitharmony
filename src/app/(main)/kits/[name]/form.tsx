@@ -9,7 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { LoaderButton } from "@/components/ui/loader-button";
 import { CreditCardIcon } from "lucide-react";
 
-export function PurchaseForm({ repoName }: { repoName: string }) {
+export function PurchaseForm({ repoId }: { repoId: string }) {
   const { toast } = useToast();
 
   const { execute, status } = useAction(purchaseAction, {
@@ -20,7 +20,7 @@ export function PurchaseForm({ repoName }: { repoName: string }) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    execute({ repoName });
+    execute({ repoId });
   };
 
   return (
@@ -29,6 +29,7 @@ export function PurchaseForm({ repoName }: { repoName: string }) {
         isLoading={status === "executing"}
         icon={CreditCardIcon}
         type="submit"
+        className="w-full"
       >
         Purchase
       </LoaderButton>

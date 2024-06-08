@@ -4,7 +4,7 @@ import {
   createPurchase,
   getPurchaseByUserAndRepo,
 } from "@/infrastructure/purchase";
-import { getRepoByName } from "@/infrastructure/repo";
+import { getRepo } from "@/infrastructure/repo";
 
 import { redirect } from "next/navigation";
 
@@ -12,13 +12,14 @@ import { addCollaborator } from "@/lib/github";
 import { ActionError, authenticatedAction } from "@/lib/safe-action";
 
 import { purchaseSchema } from "./validation";
+import { isValidObjectId } from "@/lib/utils";
 
 export const purchaseAction = authenticatedAction(
   purchaseSchema,
-  async ({ repoName }, { user }) => {
-    if (!repoName) throw new ActionError("Missing repo!");
+  async ({ repoId }, { user }) => {
+    if (!isValidObjectId(repoId)) throw new ActionError("Invalid Repo ID!");
 
-    const repo = await getRepoByName({ name: repoName });
+    const repo = await getRepo({ id: repoId });
 
     if (!repo) throw new ActionError("Repo not found!");
 
