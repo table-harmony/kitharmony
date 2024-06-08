@@ -10,3 +10,10 @@ export enum Theme {
   LIGHT = "light",
   SYSTEM = "system",
 }
+
+export function isValidObjectId(s: string): boolean {
+  if (s.length !== 24) return false;
+
+  const hexRegex = /^[0-9A-Fa-f]{24}$/;
+  return hexRegex.test(s);
+}

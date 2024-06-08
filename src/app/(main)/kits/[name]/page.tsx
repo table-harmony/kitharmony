@@ -1,6 +1,12 @@
-import { SignedIn, SignedOut } from "@/components/signed";
 import { getRepoByName, getRepos } from "@/infrastructure/repo";
+import { getPurchaseByUserAndRepo } from "@/infrastructure/purchase";
+
+import Link from "next/link";
 import { notFound } from "next/navigation";
+
+import { validateRequest } from "@/lib/auth";
+
+import { Button } from "@/components/ui/button";
 import { PurchaseForm } from "./form";
 
 export async function generateStaticParams() {
@@ -45,10 +51,27 @@ export default async function RoomPage({
           {repo.description}
         </p>
       </div>
-      <SignedIn>
-        <PurchaseForm repoName={repo.name} />
-      </SignedIn>
-      <SignedOut>Login in order to purchase this starter kit</SignedOut>
+      <Purchase repoId={repo.id} />
     </div>
   );
+}
+
+async function Purchase({ repoId }: { repoId: string }) {
+  const { user } = await validateRequest();
+
+  if (!user) return <>Login in order to purchase this starter kit</>;
+
+  const purchase = await getPurchaseByUserAndRepo({
+    userId: user.id,
+    repoId: repoId,
+  });
+
+  if (purchase)
+    return (
+      <Button asChild>
+        <Link href="/purchases">View purchase</Link>
+      </Button>
+    );
+
+  return <PurchaseForm repoId={repoId} />;
 }
