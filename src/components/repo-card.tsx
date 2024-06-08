@@ -27,7 +27,7 @@ export function RepoCard({ id, name, description, picture }: RepoCardProps) {
       <CardContent></CardContent>
       <CardFooter className="justify-between">
         FREE{" "}
-        <Link className="hover:underline" href={`/kits/${name}`}>
+        <Link className="hover:underline" href={`/${name}`}>
           Learn more →
         </Link>
       </CardFooter>

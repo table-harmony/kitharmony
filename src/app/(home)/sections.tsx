@@ -33,7 +33,7 @@ export function MainSection() {
         </SignedIn>
         <SignedOut>
           <Button asChild className="w-72">
-            <Link href="/auth/login">
+            <Link href="/login">
               Get Started <ArrowRightIcon className="ml-2 h-4 w-4" />
             </Link>
           </Button>
@@ -96,7 +96,7 @@ export function JoinSection() {
         </SignedIn>
         <SignedOut>
           <Button size="lg" asChild>
-            <Link href="/auth/login">Login</Link>
+            <Link href="/login">Login</Link>
           </Button>
         </SignedOut>
       </div>

@@ -1,15 +1,13 @@
-import { SiteHeader } from "@/components/site-header";
-import { pageTree } from "@/utils/source";
 import { DocsLayout } from "fumadocs-ui/layout";
+import { pageTree } from "@/utils/source";
 
-export default function RootDocsLayout({
+export default async function RootDocsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <SiteHeader />
       <DocsLayout tree={pageTree} nav={{ title: "Kitharmony" }}>
         {children}
       </DocsLayout>

@@ -45,7 +45,7 @@ export async function UserDropdown() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/auth/logout">
+          <Link href="/logout">
             <LogOutIcon className="mr-2 h-4 w-4" /> Logout
           </Link>
         </DropdownMenuItem>

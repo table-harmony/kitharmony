@@ -8,6 +8,8 @@ import { validateRequest } from "@/lib/auth";
 
 import { Button } from "@/components/ui/button";
 import { PurchaseForm } from "./form";
+import { SignedIn } from "@/components/signed";
+import { User } from "lucia";
 
 export async function generateStaticParams() {
   const repos = await getRepos();
@@ -42,9 +44,9 @@ export default async function RoomPage({
   if (!repo) notFound();
 
   return (
-    <div className="container flex flex-col space-y-12 pb-24 pt-12 md:py-20 lg:px-20">
-      <div className="flex flex-col items-center space-y-5">
-        <h1 className="text-balance text-center text-xl font-bold md:text-3xl lg:text-4xl">
+    <div className="container flex flex-col items-center space-y-10 pb-24 pt-12 md:py-20 lg:px-20">
+      <div className="flex flex-col items-center space-y-3">
+        <h1 className="text-balance text-center text-4xl font-bold md:text-5xl lg:text-6xl">
           {repo.name.toUpperCase()}
         </h1>
         <p className="max-w-[750px] text-center text-sm text-muted-foreground">
@@ -59,7 +61,7 @@ export default async function RoomPage({
 async function Purchase({ repoId }: { repoId: string }) {
   const { user } = await validateRequest();
 
-  if (!user) return <>Login in order to purchase this starter kit</>;
+  if (!user) return;
 
   const purchase = await getPurchaseByUserAndRepo({
     userId: user.id,
