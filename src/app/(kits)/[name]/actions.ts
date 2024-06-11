@@ -12,13 +12,10 @@ import { addCollaborator } from "@/lib/github";
 import { ActionError, authenticatedAction } from "@/lib/safe-action";
 
 import { purchaseSchema } from "./validation";
-import { isValidObjectId } from "@/lib/utils";
 
 export const purchaseAction = authenticatedAction(
   purchaseSchema,
   async ({ repoId }, { user }) => {
-    if (!isValidObjectId(repoId)) throw new ActionError("Invalid Repo ID!");
-
     const repo = await getRepo({ id: repoId });
 
     if (!repo) throw new ActionError("Repo not found!");

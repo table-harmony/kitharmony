@@ -1,9 +1,4 @@
-import {
-  FaqSection,
-  JoinSection,
-  MainSection,
-  StaterKitsSection,
-} from "./sections";
+import { FaqSection, MainSection, StaterKitsSection } from "./sections";
 
 export default function HomePage() {
   return (
@@ -11,7 +6,6 @@ export default function HomePage() {
       <MainSection />
       <StaterKitsSection />
       <FaqSection />
-      <JoinSection />
     </div>
   );
 }

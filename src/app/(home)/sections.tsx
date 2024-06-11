@@ -80,30 +80,6 @@ export function FaqSection() {
   );
 }
 
-export function JoinSection() {
-  return (
-    <section id="join" className="bg-muted/40">
-      <div className="container flex flex-col gap-2 pb-24 pt-12 md:flex-row md:items-center md:justify-between md:py-20 lg:px-20">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold md:text-4xl">stay up to date</h2>
-          <p className="max-w-md text-muted-foreground md:max-w-xl">
-            we&apos;ll let you know when we release a new kit or made
-            significant updates to an existing one.
-          </p>
-        </div>
-        <SignedIn>
-          <Button size="lg">Subscribe</Button>
-        </SignedIn>
-        <SignedOut>
-          <Button size="lg" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
-        </SignedOut>
-      </div>
-    </section>
-  );
-}
-
 interface TitleProps {
   title: string;
   subtitle: string;

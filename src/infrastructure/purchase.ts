@@ -1,4 +1,6 @@
 import db from "@/db";
+import { ActionError } from "@/lib/safe-action";
+import { isValidObjectId } from "@/lib/utils";
 import { Purchase } from "@prisma/client";
 
 export type PurchaseDto = {
@@ -26,6 +28,9 @@ export async function getPurchaseByUserAndRepo(data: {
   userId: string;
   repoId: string;
 }) {
+  if (!isValidObjectId(data.userId) || !isValidObjectId(data.repoId))
+    throw new ActionError("Invalid ID!");
+
   const purchase = await db.purchase.findUnique({
     where: { userId_repoId: { userId: data.userId, repoId: data.repoId } },
   });

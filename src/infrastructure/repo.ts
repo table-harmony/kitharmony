@@ -1,6 +1,9 @@
 import db from "@/db";
 import { Repo } from "@prisma/client";
 
+import { ActionError } from "@/lib/safe-action";
+import { isValidObjectId } from "@/lib/utils";
+
 export type RepoDto = {
   id: string;
   name: string;
@@ -28,6 +31,8 @@ export async function getRepoByName(data: { name: string }) {
 }
 
 export async function getRepo(data: { id: string }) {
+  if (!isValidObjectId(data.id)) throw new ActionError("Invalid Repo ID!");
+
   const repo = await db.repo.findUnique({ where: { id: data.id } });
 
   if (!repo) return undefined;

@@ -5,11 +5,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { validateRequest } from "@/lib/auth";
+import { createMetadata } from "@/utils/metadata";
 
 import { Button } from "@/components/ui/button";
 import { PurchaseForm } from "./form";
-import { SignedIn } from "@/components/signed";
-import { User } from "lucia";
 
 export async function generateStaticParams() {
   const repos = await getRepos();
@@ -28,13 +27,13 @@ export async function generateMetadata({
 
   if (!repo) notFound();
 
-  return {
+  return createMetadata({
     title: repo.name,
     description: repo.description,
-  };
+  });
 }
 
-export default async function RoomPage({
+export default async function KitPage({
   params,
 }: {
   params: { name: string };
