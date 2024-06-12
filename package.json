@@ -29,7 +29,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "fumadocs-core": "^11.3.2",
-    "fumadocs-mdx": "^8.2.30",
+    "fumadocs-docgen": "^1.0.2",
+    "fumadocs-mdx": "^8.2.31",
     "fumadocs-typescript": "^2.0.1",
     "fumadocs-ui": "^11.3.2",
     "lucia": "^3.2.0",
@@ -52,7 +53,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "postcss": "^8.4.38",
-    "prettier-plugin-tailwindcss": "^0.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.4",
     "prisma": "^5.15.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5"

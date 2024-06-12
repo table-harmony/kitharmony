@@ -3,7 +3,7 @@
   "root": true,
   "pages": [
     "---Guide---",
-    "index",
+    "...",
     "[GitHub](https://github.com/table-harmony/scalekit)"
   ]
 }

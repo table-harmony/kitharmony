@@ -65,9 +65,12 @@ importers:
       fumadocs-core:
         specifier: ^11.3.2
         version: 11.3.2(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      fumadocs-docgen:
+        specifier: ^1.0.2
+        version: 1.0.2(typescript@5.4.5)
       fumadocs-mdx:
-        specifier: ^8.2.30
-        version: 8.2.30(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^8.2.31
+        version: 8.2.31(fumadocs-core@11.3.2(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       fumadocs-typescript:
         specifier: ^2.0.1
         version: 2.0.1(typescript@5.4.5)
@@ -130,8 +133,8 @@ importers:
         specifier: ^8.4.38
         version: 8.4.38
       prettier-plugin-tailwindcss:
-        specifier: ^0.6.2
-        version: 0.6.2(prettier@3.3.0)
+        specifier: ^0.6.4
+        version: 0.6.4(prettier@3.3.0)
       prisma:
         specifier: ^5.15.0
         version: 5.15.0
@@ -1812,8 +1815,8 @@ packages:
   for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
 
-  foreground-child@3.1.1:
-    resolution: {integrity: sha512-TMKDUnIte6bfb5nWv7V/caI169OHgvwjb7V4WkeUvbQQdjr5rWKqHFiKWb/fcOwB+CzBT+qbWjvj+DVwRskpIg==}
+  foreground-child@3.2.0:
+    resolution: {integrity: sha512-CrWQNaEl1/6WeZoarcM9LHupTo3RpZO2Pdk1vktwzPiQTsJnAKJmm3TACKeG5UZbWDfaH2AbvYxzP96y0MT7fA==}
     engines: {node: '>=14'}
 
   fs-monkey@1.0.6:
@@ -1834,16 +1837,13 @@ packages:
       react: '>= 18'
       react-dom: '>= 18'
 
-  fumadocs-core@12.0.2:
-    resolution: {integrity: sha512-bCD87g6rVYdq9I+/P9TMGI5Pgw7qpcV2HnEO4FV3IC5h+7bKQKVQhBZDWPZkvrLAiIQ3w6JWm+MUxRzWsWkLOw==}
-    peerDependencies:
-      next: '>= 14.1.0'
-      react: '>= 18'
-      react-dom: '>= 18'
+  fumadocs-docgen@1.0.2:
+    resolution: {integrity: sha512-NwkQww+yRVONUDsPoJKiw/p+BNf2UTVRA1FYabuH8TCphCypvvVheCAhddlcH3l0wMF9bBobk9OtEoiL80OD9Q==}
 
-  fumadocs-mdx@8.2.30:
-    resolution: {integrity: sha512-9MSWMqnDSrmTiqoUQqYZqY2jal9eut0cntZ0BRB5KVtTRhMKGwg32gCH2OXBDK9V7LZUWn5WTARQ0hoZQI6Lxg==}
+  fumadocs-mdx@8.2.31:
+    resolution: {integrity: sha512-6PF51W8O7MexjqiaVP8ukqSAcg6AGibZ2QKw1BNPOZtjGsp5Rqgjn1y5wpAcCeoiCMzuheoQEEbhH39NlIg4gw==}
     peerDependencies:
+      fumadocs-core: 12.0.3
       next: '>= 14.1.0'
 
   fumadocs-typescript@2.0.1:
@@ -2672,8 +2672,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-tailwindcss@0.6.2:
-    resolution: {integrity: sha512-eFefm4cg+1c2B57+H274Qm//CTWBdtQN9ansl0YTP/8TC8x3bugCTQSS/e4FC5Ctl9djhTzsbcMrZ7x2/abIow==}
+  prettier-plugin-tailwindcss@0.6.4:
+    resolution: {integrity: sha512-3vhbIvlKyAWPaw9bUr2cw6M1BGx2Oy9CCLJyv+nxEiBGCTcL69WcAz2IFMGqx8IXSzQCInGSo2ujAByg9poHLQ==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -5120,7 +5120,7 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
-  foreground-child@3.1.1:
+  foreground-child@3.2.0:
     dependencies:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
@@ -5158,45 +5158,28 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  fumadocs-core@12.0.2(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  fumadocs-docgen@1.0.2(typescript@5.4.5):
     dependencies:
-      '@formatjs/intl-localematcher': 0.5.4
-      '@shikijs/rehype': 1.6.4
-      '@shikijs/transformers': 1.6.4
-      flexsearch: 0.7.21
-      github-slugger: 2.0.0
+      estree-util-value-to-estree: 3.1.1
+      fumadocs-typescript: 2.0.1(typescript@5.4.5)
       hast-util-to-estree: 3.1.0
-      negotiator: 0.6.3
-      next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       npm-to-yarn: 2.2.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-remove-scroll: 2.5.10(@types/react@18.3.3)(react@18.3.1)
-      remark: 15.0.1
-      remark-gfm: 4.0.0
-      remark-mdx: 3.0.1
-      scroll-into-view-if-needed: 3.1.0
-      shiki: 1.6.4
-      swr: 2.2.5(react@18.3.1)
       unist-util-visit: 5.0.0
     transitivePeerDependencies:
-      - '@types/react'
       - supports-color
+      - typescript
 
-  fumadocs-mdx@8.2.30(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  fumadocs-mdx@8.2.31(fumadocs-core@11.3.2(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       '@mdx-js/mdx': 3.0.1
       cross-spawn: 7.0.3
       estree-util-value-to-estree: 3.1.1
       fast-glob: 3.3.2
-      fumadocs-core: 12.0.2(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      fumadocs-core: 11.3.2(@types/react@18.3.3)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       gray-matter: 4.0.3
       next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zod: 3.23.8
     transitivePeerDependencies:
-      - '@types/react'
-      - react
-      - react-dom
       - supports-color
 
   fumadocs-typescript@2.0.1(typescript@5.4.5):
@@ -5280,7 +5263,7 @@ snapshots:
 
   glob@10.3.10:
     dependencies:
-      foreground-child: 3.1.1
+      foreground-child: 3.2.0
       jackspeak: 2.3.6
       minimatch: 9.0.4
       minipass: 7.1.2
@@ -5288,7 +5271,7 @@ snapshots:
 
   glob@10.4.1:
     dependencies:
-      foreground-child: 3.1.1
+      foreground-child: 3.2.0
       jackspeak: 3.4.0
       minimatch: 9.0.4
       minipass: 7.1.2
@@ -6380,7 +6363,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.6.2(prettier@3.3.0):
+  prettier-plugin-tailwindcss@0.6.4(prettier@3.3.0):
     dependencies:
       prettier: 3.3.0
 

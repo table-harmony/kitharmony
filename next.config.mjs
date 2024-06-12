@@ -1,8 +1,10 @@
 import createMDX from "fumadocs-mdx/config";
+import { remarkInstall } from "fumadocs-docgen";
 
 const withMDX = createMDX({
   mdxOptions: {
     lastModifiedTime: "git",
+    remarkPlugins: [[remarkInstall, { Tabs: "InstallTabs" }]],
   },
 });
 

@@ -1,0 +1,147 @@
+---
+title: Emails
+description: Learn how to send your emails using Resend and React email.
+icon: Mail
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+
+## Resend
+
+[Resend](https://resend.com) is the email API for developers.
+
+### Installation
+
+Follow [Resend Documentation](https://resend.com/docs/send-with-nextjs) on how to setup resend in your project.
+
+<Callout type="warn">
+  Remember to add the RESEND_API_KEY to the environment variables.
+</Callout>
+
+### Utility
+
+Create the file mail.ts in the lib folder, this file will have a `sendEmail` utility function.
+
+<TypeTable
+  type={{
+    email: {
+      description: "Who the email is designated for.",
+      type: "string",
+    },
+    subject: {
+      description: "The subject of the email.",
+      type: "string",
+    },
+    body: {
+      description: "The Content of the email.",
+      type: "React.ReactElement",
+    },
+  }}
+/>
+
+```typescript title="mail.ts"
+import { env } from "@/env";
+
+import { Resend } from "resend";
+
+const resend = new Resend(env.RESEND_API_KEY);
+
+export const sendEmail = async (
+  email: string,
+  subject: string,
+  body: React.ReactElement,
+) => {
+  await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: email,
+    subject: subject,
+    react: body,
+  });
+};
+```
+
+<Callout>
+  Unless you have a domain keep onboarding@resend.dev, otherwise use
+  domain@mail.com
+</Callout>
+
+## React Email
+
+[React Email](https://react.email) is for building and sending emails using React and TypeScript.
+
+### Installation
+
+<Tabs items={["npm", "pnpm"]}>
+    <Tab value='npm'>
+
+```bash
+npm install @react-email/components -E
+```
+
+    </Tab>
+    <Tab value="pnpm">
+
+```bash
+pnpm add @react-email/components -E
+```
+
+    </Tab>
+
+</Tabs>
+
+<Callout>
+  Visit [React email](https://react.email/docs/introduction) docs for more
+  information
+</Callout>
+
+### Components
+
+Create a folder called `emails` in your components folder:
+
+<Files>
+  <Folder name="components" defaultOpen>
+    <Folder name="emails" defaultOpen />
+  </Folder>
+</Files>
+
+<Callout>This folder is for all your email components.</Callout>
+
+## Usage
+
+Create an email component in the emails folder:
+
+```typescript title="demo.tsx"
+import {
+  Body,
+  Html,
+  Text,
+} from "@react-email/components";
+
+export function DemoEmail() {
+  return (
+    <Html lang="en">
+      <Body>
+        <Text>This is my Demo email!!!</Text>
+      </Body>
+    </Html>
+  );
+}
+```
+
+Finally create an action which sends the email:
+
+```typescript
+import { sendEmail } from "@/lib/mail";
+
+import { DemoEmail } from "@/components/emails/demo";
+
+export async function action() {
+  const email = "johndoe@gmail.com";
+  const subject = "Hello !!!";
+
+  await sendEmail(email, subject, DemoEmail());
+}
+```
