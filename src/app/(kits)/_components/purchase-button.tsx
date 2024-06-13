@@ -1,4 +1,5 @@
-import { getPurchaseByUserAndKit } from "@/infrastructure/purchase";
+import { getPurchaseUseCase } from "@/infrastructure/purchases";
+import { getKitByNameUseCase } from "@/infrastructure/kits";
 
 import Link from "next/link";
 
@@ -7,7 +8,6 @@ import { validateRequest } from "@/lib/auth";
 import { PurchaseForm } from "./purchase-form";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, BookIcon } from "lucide-react";
-import { getKitByName } from "@/infrastructure/kit";
 
 export async function PurchaseButton({ kitName }: { kitName: string }) {
   const { user } = await validateRequest();
@@ -21,11 +21,11 @@ export async function PurchaseButton({ kitName }: { kitName: string }) {
       </Button>
     );
 
-  const kit = await getKitByName({ name: kitName });
+  const kit = await getKitByNameUseCase({ name: kitName });
 
   if (!kit) return;
 
-  const purchase = await getPurchaseByUserAndKit({
+  const purchase = await getPurchaseUseCase({
     userId: user.id,
     kitId: kit.id,
   });

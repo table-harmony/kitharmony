@@ -1,10 +1,10 @@
 "use server";
 
 import {
-  createPurchase,
-  getPurchaseByUserAndKit,
-} from "@/infrastructure/purchase";
-import { getKit } from "@/infrastructure/kit";
+  createPurchaseUseCase,
+  getPurchaseUseCase,
+} from "@/infrastructure/purchases";
+import { getKitUseCase } from "@/infrastructure/kits";
 
 import { redirect } from "next/navigation";
 
@@ -16,18 +16,18 @@ import { purchaseSchema } from "./validation";
 export const purchaseAction = authenticatedAction(
   purchaseSchema,
   async ({ kitId }, { user }) => {
-    const kit = await getKit({ id: kitId });
+    const kit = await getKitUseCase({ id: kitId });
 
     if (!kit) throw new ActionError("Kit not found!");
 
-    const existingPurchase = await getPurchaseByUserAndKit({
+    const existingPurchase = await getPurchaseUseCase({
       userId: user.id,
       kitId: kit.id,
     });
 
     if (existingPurchase) return redirect("/purchases");
 
-    await createPurchase({ userId: user.id, kitId: kit.id });
+    await createPurchaseUseCase({ userId: user.id, kitId: kit.id });
 
     await addCollaborator(user.username, kit.name);
 

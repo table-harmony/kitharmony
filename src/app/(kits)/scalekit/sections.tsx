@@ -1,4 +1,4 @@
-import { getKitByName } from "@/infrastructure/kit";
+import { getKitByNameUseCase } from "@/infrastructure/kits";
 
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ import { CheckIcon } from "lucide-react";
 import { Suspense } from "react";
 
 async function Header() {
-  const kit = await getKitByName({ name: "scalekit" });
+  const kit = await getKitByNameUseCase({ name: "scalekit" });
 
   if (!kit) return;
 

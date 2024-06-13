@@ -1,4 +1,4 @@
-import { getKits } from "@/infrastructure/kit";
+import { getKitsUseCase } from "@/infrastructure/kits";
 
 import Link from "next/link";
 import { Suspense } from "react";
@@ -67,7 +67,7 @@ export function StaterKitsSection() {
 }
 
 async function Kits() {
-  const kits = await getKits();
+  const kits = await getKitsUseCase();
 
   return (
     <>

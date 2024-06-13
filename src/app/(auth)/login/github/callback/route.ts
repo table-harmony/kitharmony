@@ -1,4 +1,8 @@
-import { createUser, getUserByGithub, updateUser } from "@/infrastructure/user";
+import {
+  createUserUseCase,
+  getUserByGithubUseCase,
+  updateUserUseCase,
+} from "@/infrastructure/users";
 
 import { cookies } from "next/headers";
 import { github, lucia } from "@/lib/auth";
@@ -22,14 +26,16 @@ export async function GET(request: Request): Promise<Response> {
     });
     const githubUser: GitHubUser = await response.json();
 
-    const existingUser = await getUserByGithub({ github_id: githubUser.id });
+    const existingUser = await getUserByGithubUseCase({
+      github_id: githubUser.id,
+    });
 
     if (existingUser) {
-      await updateUser(existingUser.id, {
+      await updateUserUseCase({
+        id: existingUser.id,
         username: githubUser.login,
         picture: githubUser.avatar_url,
         email: githubUser.email,
-        github_id: githubUser.id,
       });
 
       const session = await lucia.createSession(existingUser.id, {});
@@ -37,7 +43,7 @@ export async function GET(request: Request): Promise<Response> {
       cookies().set(
         sessionCookie.name,
         sessionCookie.value,
-        sessionCookie.attributes
+        sessionCookie.attributes,
       );
       return new Response(null, {
         status: 302,
@@ -47,7 +53,7 @@ export async function GET(request: Request): Promise<Response> {
       });
     }
 
-    const user = await createUser({
+    const user = await createUserUseCase({
       github_id: githubUser.id,
       username: githubUser.login,
       picture: githubUser.avatar_url,
@@ -59,7 +65,7 @@ export async function GET(request: Request): Promise<Response> {
     cookies().set(
       sessionCookie.name,
       sessionCookie.value,
-      sessionCookie.attributes
+      sessionCookie.attributes,
     );
 
     return new Response(null, {
@@ -69,7 +75,6 @@ export async function GET(request: Request): Promise<Response> {
       },
     });
   } catch (e) {
-    console.log(e);
     if (e instanceof OAuth2RequestError)
       return new Response(null, { status: 400 });
     return new Response(null, { status: 500 });

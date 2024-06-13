@@ -1,5 +1,5 @@
-import { getKitByName } from "@/infrastructure/kit";
-import { getPurchaseByUserAndKit } from "@/infrastructure/purchase";
+import { getKitByNameUseCase } from "@/infrastructure/kits";
+import { getPurchaseUseCase } from "@/infrastructure/purchases";
 
 import { notFound, redirect } from "next/navigation";
 
@@ -66,11 +66,11 @@ async function getPurchaseFromParams(params: { slug?: string[] }) {
 
   const kitName = params.slug?.at(0);
 
-  const kit = await getKitByName({ name: kitName ?? "" });
+  const kit = await getKitByNameUseCase({ name: kitName ?? "" });
 
   if (!kit) redirect("/");
 
-  const purchase = await getPurchaseByUserAndKit({
+  const purchase = await getPurchaseUseCase({
     userId: user.id,
     kitId: kit.id,
   });

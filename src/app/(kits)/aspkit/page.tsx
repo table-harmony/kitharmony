@@ -1,4 +1,4 @@
-import { getKitByName } from "@/infrastructure/kit";
+import { getKitByNameUseCase } from "@/infrastructure/kits";
 
 import { Section } from "@/components/section";
 import {
@@ -21,7 +21,7 @@ export default async function AspkitPage() {
 }
 
 async function Header() {
-  const kit = await getKitByName({ name: "aspkit" });
+  const kit = await getKitByNameUseCase({ name: "aspkit" });
 
   if (!kit) return;
 

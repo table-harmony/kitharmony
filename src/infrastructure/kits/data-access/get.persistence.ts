@@ -1,16 +1,9 @@
+import "server-only";
+
 import db from "@/db";
 import { Kit } from "@prisma/client";
 
-import { ActionError } from "@/lib/safe-action";
-import { isValidObjectId } from "@/lib/utils";
-
-export type KitDto = {
-  id: string;
-  name: string;
-  link: string;
-  description: string;
-  picture: string;
-};
+import { KitDto } from "../types";
 
 export function toDtoMapper(kit: Kit): KitDto {
   return {
@@ -31,8 +24,6 @@ export async function getKitByName(data: { name: string }) {
 }
 
 export async function getKit(data: { id: string }) {
-  if (!isValidObjectId(data.id)) throw new ActionError("Invalid Kit ID!");
-
   const kit = await db.kit.findUnique({ where: { id: data.id } });
 
   if (!kit) return undefined;
