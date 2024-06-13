@@ -2,7 +2,8 @@ export const siteConfig = {
   name: "kitharmony",
   url: "https://kitharmony.vercel.app",
   author: "tableharmony",
-  description: "production-ready saas starter kits for everyone",
+  description:
+    "production-ready saas starter kits built with the ultimate tech stacks",
   links: {
     github: "https://github.com/table-harmony/kitharmony",
     linkedin:

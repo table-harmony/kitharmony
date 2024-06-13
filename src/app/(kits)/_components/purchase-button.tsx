@@ -40,5 +40,5 @@ export async function PurchaseButton({ kitName }: { kitName: string }) {
       </Button>
     );
 
-  return <PurchaseForm kitId={kit.id} />;
+  return <PurchaseForm kitName={kit.name} />;
 }

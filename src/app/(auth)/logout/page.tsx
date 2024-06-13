@@ -9,7 +9,7 @@ import {
 
 export default function LogoutPage() {
   return (
-    <Section className="space-y-10">
+    <Section>
       <PageHeader>
         <PageHeaderHeading>Logout</PageHeaderHeading>
         <PageHeaderDescription>

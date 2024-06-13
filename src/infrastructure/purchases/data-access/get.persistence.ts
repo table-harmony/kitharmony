@@ -23,3 +23,12 @@ export async function getPurchase(data: { userId: string; kitId: string }) {
 
   return toDtoMapper(purchase);
 }
+
+export async function getUserPurchases(data: { userId: string }) {
+  const purchases = await db.purchase.findMany({
+    where: data,
+    include: { kit: true },
+  });
+
+  return purchases;
+}

@@ -13,7 +13,7 @@ import {
 
 export default function LoginPage() {
   return (
-    <Section className="space-y-10">
+    <Section>
       <PageHeader>
         <PageHeaderHeading>Login</PageHeaderHeading>
         <PageHeaderDescription>

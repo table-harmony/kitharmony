@@ -4,7 +4,7 @@ import {
   createPurchaseUseCase,
   getPurchaseUseCase,
 } from "@/infrastructure/purchases";
-import { getKitUseCase } from "@/infrastructure/kits";
+import { getKitByNameUseCase } from "@/infrastructure/kits";
 
 import { redirect } from "next/navigation";
 
@@ -15,8 +15,8 @@ import { purchaseSchema } from "./validation";
 
 export const purchaseAction = authenticatedAction(
   purchaseSchema,
-  async ({ kitId }, { user }) => {
-    const kit = await getKitUseCase({ id: kitId });
+  async ({ kitName }, { user }) => {
+    const kit = await getKitByNameUseCase({ name: kitName });
 
     if (!kit) throw new ActionError("Kit not found!");
 

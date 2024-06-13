@@ -64,10 +64,10 @@ export async function MainSection() {
         <PurchaseButton kitName="scalekit" />
       </Suspense>
       <ThemeImage
-        src="/scalekit/hero-light.png"
-        dark="/scalekit/hero-dark.png"
+        src="/scalekit/landing/hero-light.png"
+        dark="/scalekit/landing/hero-dark.png"
         alt="Hero image"
-        className="max-w-6xl px-6 pt-8 dark:hidden sm:max-w-4xl md:max-w-screen-xl lg:px-8"
+        className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8"
       />
     </Section>
   );
@@ -89,8 +89,8 @@ export function FeaturesSection() {
             className="mt-4 w-full px-4 md:max-w-sm"
           />
           <ThemeImage
-            src="/scalekit/authentication-light.png"
-            dark="/scalekit/authentication-dark.png"
+            src="/scalekit/landing/authentication-light.png"
+            dark="/scalekit/landing/authentication-dark.png"
             alt="First feature"
             className="px-6 sm:max-w-4xl md:mr-14 md:min-w-[500px] md:max-w-screen-xl lg:px-8"
           />
@@ -102,8 +102,8 @@ export function FeaturesSection() {
             className="mt-4 w-full px-4 md:max-w-sm"
           />
           <ThemeImage
-            src="/scalekit/emails-light.png"
-            dark="/scalekit/emails-dark.png"
+            src="/scalekit/landing/emails-light.png"
+            dark="/scalekit/landing/emails-dark.png"
             alt="Second feature"
             className="px-6 sm:max-w-4xl md:mr-14 md:min-w-[500px] md:max-w-screen-xl lg:px-8"
           />
@@ -115,8 +115,8 @@ export function FeaturesSection() {
             className="mt-4 w-full px-4 md:max-w-sm"
           />
           <ThemeImage
-            src="/scalekit/documentation-light.png"
-            dark="/scalekit/documentation-dark.png"
+            src="/scalekit/landing/documentation-light.png"
+            dark="/scalekit/landing/documentation-dark.png"
             alt="Third feature"
             className="px-6 sm:max-w-4xl md:mr-14 md:min-w-[500px] md:max-w-screen-xl lg:px-8"
           />

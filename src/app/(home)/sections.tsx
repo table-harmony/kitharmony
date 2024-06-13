@@ -12,6 +12,7 @@ import { ArrowRightIcon, CreditCardIcon } from "lucide-react";
 import {
   PageActions,
   PageHeader,
+  PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
 import { Section } from "@/components/section";
@@ -24,9 +25,10 @@ export async function MainSection() {
   return (
     <Section>
       <PageHeader>
-        <PageHeaderHeading className="text-balance text-4xl font-bold md:text-5xl lg:text-6xl">
-          {siteConfig.description}
+        <PageHeaderHeading className="w-[980px] text-balance text-4xl font-bold md:text-6xl lg:text-7xl">
+          modern, fully built and polished stacks
         </PageHeaderHeading>
+        <PageHeaderDescription>{siteConfig.description}</PageHeaderDescription>
         <PageActions>
           {user ? (
             <Button className="w-72" asChild>

@@ -12,9 +12,9 @@ export function SiteFooter() {
       <div className="container mx-auto px-4 lg:px-20">
         <section className="flex flex-col items-center space-y-2">
           <Link href="/" className="text-2xl font-medium">
-            {siteConfig.name}
+            {siteConfig.name.toUpperCase()}
           </Link>
-          <p className="max-w-xs text-sm text-muted-foreground">
+          <p className="max-w-xs text-center text-sm text-muted-foreground">
             {siteConfig.description}
           </p>
           <div className="flex gap-2">
