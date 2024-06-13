@@ -14,6 +14,7 @@ import { Section } from "@/components/section";
 import { ThemeImage } from "@/components/image-wrapper";
 import { CheckIcon } from "lucide-react";
 import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 async function Header() {
   const kit = await getKitByNameUseCase({ name: "scalekit" });
@@ -28,10 +29,19 @@ async function Header() {
   );
 }
 
-export async function MainSection() {
+function HeaderSkeleton() {
+  return (
+    <div className="flex flex-col items-center space-y-3">
+      <Skeleton className="h-[50px] w-[250px] rounded-xl" />
+      <Skeleton className="h-4 w-[550px]" />
+    </div>
+  );
+}
+
+export function MainSection() {
   return (
     <Section id="main" className="flex flex-col items-center space-y-10">
-      <Suspense>
+      <Suspense fallback={<HeaderSkeleton />}>
         <Header />
       </Suspense>
       <ul className="space-y-1.5 leading-relaxed">
@@ -58,7 +68,7 @@ export async function MainSection() {
           </p>
         </li>
       </ul>
-      <Suspense>
+      <Suspense fallback={<Skeleton className="h-[50px] w-[300px]" />}>
         <PurchaseButton kitName="scalekit" />
       </Suspense>
       <ThemeImage
@@ -80,10 +90,10 @@ export function FeaturesSection() {
         className="text-center"
       />
       <div className="mt-8 grid grid-cols-1 gap-20 md:mt-24 md:gap-40">
-        <div className="flex flex-col items-center justify-center md:flex-row-reverse">
+        <div className="flex flex-col items-center justify-center gap-5 md:flex-row-reverse">
           <Title
             title="Authentication"
-            subtitle="Support for oauth and credentials."
+            subtitle="support for oauth and credentials."
             className="mt-4 w-full px-4 md:max-w-sm"
           />
           <ThemeImage
@@ -96,7 +106,7 @@ export function FeaturesSection() {
         <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
           <Title
             title="Emails"
-            subtitle="Uses React Email and Resend."
+            subtitle="uses React Email and Resend."
             className="mt-4 w-full px-4 md:max-w-sm"
           />
           <ThemeImage
@@ -106,7 +116,7 @@ export function FeaturesSection() {
             className="px-6 sm:max-w-4xl md:mr-14 md:min-w-[500px] md:max-w-screen-xl lg:px-8"
           />
         </div>
-        <div className="flex flex-col items-center justify-center md:flex-row-reverse">
+        <div className="flex flex-col items-center justify-center gap-5 md:flex-row-reverse">
           <Title
             title="Documentation"
             subtitle="well-documented using Fumadocs."
@@ -132,7 +142,7 @@ export function PurchaseSection() {
         subtitle="pay once. unlimited use."
         className="text-center"
       />
-      <Suspense>
+      <Suspense fallback={<Skeleton className="h-[50px] w-[300px]" />}>
         <PurchaseButton kitName="scalekit" />
       </Suspense>
     </Section>

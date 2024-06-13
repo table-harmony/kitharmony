@@ -8,7 +8,13 @@ import { validateRequest } from "@/lib/auth";
 
 import { Button } from "@/components/ui/button";
 import { Title } from "@/components/title";
-import { ArrowRightIcon, CreditCardIcon, ShoppingCartIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  BookIcon,
+  CreditCardIcon,
+  FoldersIcon,
+  ShoppingCartIcon,
+} from "lucide-react";
 import {
   PageActions,
   PageHeader,
@@ -16,8 +22,8 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header";
 import { Section } from "@/components/section";
-import { ThemeImage } from "@/components/image-wrapper";
 import { KitCard } from "@/components/kit-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function MainSection() {
   const { user } = await validateRequest();
@@ -26,7 +32,7 @@ export async function MainSection() {
     <Section className="space-y-5">
       <PageHeader className="space-y-5">
         <PageHeaderHeading className="max-w-[980px] text-balance text-4xl font-bold md:text-6xl lg:text-7xl">
-          modern, fully built and polished stacks
+          Modern, fully built and polished stacks
         </PageHeaderHeading>
         <PageHeaderDescription>{siteConfig.description}</PageHeaderDescription>
         <PageActions>
@@ -39,32 +45,68 @@ export async function MainSection() {
           ) : (
             <Button asChild className="w-72">
               <Link href="/login">
-                Get Started <ArrowRightIcon className="ml-2 h-4 w-4" />
+                Get started <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           )}
         </PageActions>
       </PageHeader>
-      <ThemeImage
-        src="/hero-light.png"
-        dark="/hero-dark.png"
-        alt="Hero image"
-        className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8"
-      />
+      <div className="mt-8 grid w-full grid-cols-1 gap-4 md:mt-24 md:grid-cols-3">
+        <div className="flex flex-col space-y-2 p-4 md:p-6">
+          <div className="flex items-center">
+            <FoldersIcon className="mr-2 h-6 w-6 text-primary" />
+            <span className="text-lg font-semibold">Resources</span>
+          </div>
+          <p>
+            The starter kits will enable you to setup your own SaaS product.
+          </p>
+        </div>
+        <div className="flex flex-col space-y-2 p-4 md:p-6">
+          <div className="flex items-center">
+            <CreditCardIcon className="mr-2 h-6 w-6 text-primary" />
+            <span className="text-lg font-semibold">Purchases</span>
+          </div>
+          <p>Access to starter kit repository code and documentation.</p>
+        </div>
+        <div className="flex flex-col space-y-2 p-4 md:p-6">
+          <div className="flex items-center">
+            <BookIcon className="mr-2 h-6 w-6 text-primary" />
+            <span className="text-lg font-semibold">Documentation</span>
+          </div>
+          <p>
+            Including a complete walkthrough on how to set the starter kits up
+            and maintain them.
+          </p>
+        </div>
+      </div>
     </Section>
   );
 }
 
 export function StaterKitsSection() {
   return (
-    <Section id="kits">
-      <Title title="Starter kits" subtitle="modern, polished stacks" />
+    <Section id="kits" className="flex flex-col items-center">
+      <Title
+        title="Starter kits"
+        subtitle="modern, polished stacks"
+        className="text-center"
+      />
       <div className="flex w-full flex-col gap-6 py-8 md:grid md:grid-cols-3 md:py-16">
-        <Suspense>
+        <Suspense fallback={<KitsSkeleton />}>
           <Kits />
         </Suspense>
       </div>
     </Section>
+  );
+}
+
+function KitsSkeleton() {
+  return (
+    <>
+      <Skeleton className="h-[300px] w-full" />
+      <Skeleton className="h-[300px] w-full" />
+      <Skeleton className="h-[300px] w-full" />
+    </>
   );
 }
 

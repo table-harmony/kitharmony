@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 function NoResult({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="mx-auto max-w-4xl border py-10 shadow md:py-20">
+    <Card className="mx-auto max-w-4xl border-none py-10 shadow-none md:py-20">
       <CardContent className="flex flex-col items-center justify-center space-y-10">
         {children}
       </CardContent>
