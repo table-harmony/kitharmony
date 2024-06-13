@@ -15,7 +15,7 @@ export default function LoginPage() {
   return (
     <Section>
       <PageHeader>
-        <PageHeaderHeading>Login</PageHeaderHeading>
+        <PageHeaderHeading className="uppercase">login</PageHeaderHeading>
         <PageHeaderDescription>
           Sign in to your account using the options below
         </PageHeaderDescription>

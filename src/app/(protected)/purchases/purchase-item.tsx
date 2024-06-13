@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BookIcon, GithubIcon } from "lucide-react";
+import { ArrowRightIcon, BookIcon, GithubIcon } from "lucide-react";
 
 interface PurchaseItemProps {
   id: string;

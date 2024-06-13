@@ -35,7 +35,7 @@ export async function PurchaseButton({ kitName }: { kitName: string }) {
       <Button className="w-72" asChild>
         <Link href={`/docs/${kit.name}`}>
           <BookIcon className="mr-2 h-4 w-4" />
-          Documentation
+          documentation
         </Link>
       </Button>
     );

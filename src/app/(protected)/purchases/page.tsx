@@ -13,9 +13,9 @@ export default async function PurchasesPage() {
   if (!user) redirect("/");
 
   return (
-    <Section className="space-y-10">
+    <Section>
       <PageHeader>
-        <PageHeaderHeading>Purchases</PageHeaderHeading>
+        <PageHeaderHeading className="uppercase">purchases</PageHeaderHeading>
       </PageHeader>
       <Suspense>
         <PurchasesList />

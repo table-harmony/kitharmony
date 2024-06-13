@@ -11,7 +11,7 @@ export default function LogoutPage() {
   return (
     <Section>
       <PageHeader>
-        <PageHeaderHeading>Logout</PageHeaderHeading>
+        <PageHeaderHeading className="uppercase">logout</PageHeaderHeading>
         <PageHeaderDescription>
           You are about to sign out of your account.
         </PageHeaderDescription>

@@ -38,11 +38,6 @@ export async function UserDropdown() {
             <CreditCardIcon className="mr-2 h-4 w-4" /> Purchases
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/settings">
-            <SettingsIcon className="mr-2 h-4 w-4" /> Settings
-          </Link>
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/logout">

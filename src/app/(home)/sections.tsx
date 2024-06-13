@@ -23,9 +23,9 @@ export async function MainSection() {
   const { user } = await validateRequest();
 
   return (
-    <Section>
-      <PageHeader>
-        <PageHeaderHeading className="w-[980px] text-balance text-4xl font-bold md:text-6xl lg:text-7xl">
+    <Section className="space-y-5">
+      <PageHeader className="space-y-5">
+        <PageHeaderHeading className="max-w-[980px] text-balance text-4xl font-bold md:text-6xl lg:text-7xl">
           modern, fully built and polished stacks
         </PageHeaderHeading>
         <PageHeaderDescription>{siteConfig.description}</PageHeaderDescription>
@@ -33,7 +33,7 @@ export async function MainSection() {
           {user ? (
             <Button className="w-72" asChild>
               <Link href="/purchases">
-                <CreditCardIcon className="mr-2 h-4 w-4" /> Purchases
+                <CreditCardIcon className="mr-2 h-4 w-4" /> purchases
               </Link>
             </Button>
           ) : (
@@ -46,8 +46,8 @@ export async function MainSection() {
         </PageActions>
       </PageHeader>
       <ThemeImage
-        src="/banner-light.png"
-        dark="/banner-dark.png"
+        src="/hero-light.png"
+        dark="/hero-dark.png"
         alt="Hero image"
         className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8"
       />

@@ -25,8 +25,7 @@ export function KitCard({ id, name, description, picture }: KitCardProps) {
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent></CardContent>
-      <CardFooter className="justify-between">
-        FREE{" "}
+      <CardFooter className="justify-end">
         <Link className="hover:underline" href={`/${name}`}>
           Learn more →
         </Link>

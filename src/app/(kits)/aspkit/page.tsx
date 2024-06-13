@@ -27,9 +27,7 @@ async function Header() {
 
   return (
     <PageHeader>
-      <PageHeaderHeading className="text-primary">
-        {kit.name.toUpperCase()}
-      </PageHeaderHeading>
+      <PageHeaderHeading>{kit.name.toUpperCase()}</PageHeaderHeading>
       <PageHeaderDescription>{kit.description}</PageHeaderDescription>
       <PageActions>
         <PurchaseButton kitName={kit.name} />

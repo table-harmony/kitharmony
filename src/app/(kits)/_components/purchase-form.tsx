@@ -29,9 +29,9 @@ export function PurchaseForm({ kitName }: { kitName: string }) {
         isLoading={status === "executing"}
         icon={CreditCardIcon}
         type="submit"
-        className="w-full"
+        className="w-72"
       >
-        Purchase
+        purchase
       </LoaderButton>
     </form>
   );
