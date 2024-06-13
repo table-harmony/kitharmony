@@ -1,17 +1,18 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
 interface PurchaseItemProps {
   id: string;
-  repoName: string;
+  kitName: string;
   link: string;
   createdAt: Date;
 }
 
 export function PurchaseItem({
   id,
-  repoName,
+  kitName,
   link,
   createdAt,
 }: PurchaseItemProps) {
@@ -23,7 +24,7 @@ export function PurchaseItem({
         rel="noreferrer"
         className="text-xl font-medium underline underline-offset-4"
       >
-        {repoName}
+        {kitName}
       </Link>
       <p className="text-sm text-muted-foreground">Purchase ID: {id}</p>
       <div className="flex items-center justify-between">
@@ -32,13 +33,13 @@ export function PurchaseItem({
           {createdAt.toLocaleDateString()}
         </p>
         <Link
-          href={`/docs/${repoName}`}
+          href={`/docs/${kitName}`}
           className={cn(
             buttonVariants({ variant: "link" }),
             "py-0 text-xs font-medium",
           )}
         >
-          To docs →
+          To docs <ArrowRightIcon className="ml-2 h-4 w-4" />
         </Link>
       </div>
     </article>

@@ -1,4 +1,4 @@
-import { getRepoByName } from "@/infrastructure/repo";
+import { getKitByName } from "@/infrastructure/kit";
 
 import { Section } from "@/components/section";
 import {
@@ -21,18 +21,18 @@ export default async function AspkitPage() {
 }
 
 async function Header() {
-  const repo = await getRepoByName({ name: "aspkit" });
+  const kit = await getKitByName({ name: "aspkit" });
 
-  if (!repo) return;
+  if (!kit) return;
 
   return (
     <PageHeader>
       <PageHeaderHeading className="text-primary">
-        {repo.name.toUpperCase()}
+        {kit.name.toUpperCase()}
       </PageHeaderHeading>
-      <PageHeaderDescription>{repo.description}</PageHeaderDescription>
+      <PageHeaderDescription>{kit.description}</PageHeaderDescription>
       <PageActions>
-        <PurchaseButton repoName={repo.name} />
+        <PurchaseButton kitName={kit.name} />
       </PageActions>
     </PageHeader>
   );

@@ -5,6 +5,7 @@ import { Section } from "@/components/section";
 
 import { GithubIcon } from "lucide-react";
 import {
+  PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
@@ -19,12 +20,14 @@ export default function LoginPage() {
           Sign in to your account using the options below
         </PageHeaderDescription>
       </PageHeader>
-      <Button className="w-full" asChild>
-        <Link href="/login/github">
-          <GithubIcon className="mr-2 h-4 w-4" />
-          <span className="hidden md:block">Sign in with&nbsp;</span> Github
-        </Link>
-      </Button>
+      <PageActions>
+        <Button className="md:w-72" asChild>
+          <Link href="/login/github">
+            <GithubIcon className="mr-2 h-4 w-4" />
+            <span className="hidden md:block">Sign in with&nbsp;</span> Github
+          </Link>
+        </Button>
+      </PageActions>
     </Section>
   );
 }

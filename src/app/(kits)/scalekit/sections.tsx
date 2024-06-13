@@ -1,9 +1,10 @@
+import { getKitByName } from "@/infrastructure/kit";
+
 import Link from "next/link";
 
 import { PurchaseButton } from "../_components/purchase-button";
 
 import {
-  PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
@@ -12,20 +13,19 @@ import { Title } from "@/components/title";
 import { Section } from "@/components/section";
 import { ThemeImage } from "@/components/image-wrapper";
 import { CheckIcon } from "lucide-react";
-import { getRepoByName } from "@/infrastructure/repo";
 import { Suspense } from "react";
 
 async function Header() {
-  const repo = await getRepoByName({ name: "scalekit" });
+  const kit = await getKitByName({ name: "scalekit" });
 
-  if (!repo) return;
+  if (!kit) return;
 
   return (
     <PageHeader>
       <PageHeaderHeading className="text-primary">
-        {repo.name.toUpperCase()}
+        {kit.name.toUpperCase()}
       </PageHeaderHeading>
-      <PageHeaderDescription>{repo.description}</PageHeaderDescription>
+      <PageHeaderDescription>{kit.description}</PageHeaderDescription>
     </PageHeader>
   );
 }
@@ -61,7 +61,7 @@ export async function MainSection() {
         </li>
       </ul>
       <Suspense>
-        <PurchaseButton repoName="scalekit" />
+        <PurchaseButton kitName="scalekit" />
       </Suspense>
       <ThemeImage
         src="/scalekit/hero-light.png"
@@ -135,7 +135,7 @@ export function PurchaseSection() {
         className="text-center"
       />
       <Suspense>
-        <PurchaseButton repoName="scalekit" />
+        <PurchaseButton kitName="scalekit" />
       </Suspense>
     </Section>
   );

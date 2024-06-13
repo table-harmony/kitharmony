@@ -2,9 +2,9 @@
 
 import {
   createPurchase,
-  getPurchaseByUserAndRepo,
+  getPurchaseByUserAndKit,
 } from "@/infrastructure/purchase";
-import { getRepo } from "@/infrastructure/repo";
+import { getKit } from "@/infrastructure/kit";
 
 import { redirect } from "next/navigation";
 
@@ -15,21 +15,21 @@ import { purchaseSchema } from "./validation";
 
 export const purchaseAction = authenticatedAction(
   purchaseSchema,
-  async ({ repoId }, { user }) => {
-    const repo = await getRepo({ id: repoId });
+  async ({ kitId }, { user }) => {
+    const kit = await getKit({ id: kitId });
 
-    if (!repo) throw new ActionError("Repo not found!");
+    if (!kit) throw new ActionError("Kit not found!");
 
-    const existingPurchase = await getPurchaseByUserAndRepo({
+    const existingPurchase = await getPurchaseByUserAndKit({
       userId: user.id,
-      repoId: repo.id,
+      kitId: kit.id,
     });
 
     if (existingPurchase) return redirect("/purchases");
 
-    await createPurchase({ userId: user.id, repoId: repo.id });
+    await createPurchase({ userId: user.id, kitId: kit.id });
 
-    await addCollaborator(user.username, repo.name);
+    await addCollaborator(user.username, kit.name);
 
     return redirect("/purchases/success");
   },

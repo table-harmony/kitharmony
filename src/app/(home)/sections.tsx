@@ -1,4 +1,4 @@
-import { getRepos } from "@/infrastructure/repo";
+import { getKits } from "@/infrastructure/kit";
 
 import Link from "next/link";
 import { Suspense } from "react";
@@ -7,7 +7,6 @@ import { siteConfig } from "@/config/site";
 import { validateRequest } from "@/lib/auth";
 
 import { Button } from "@/components/ui/button";
-import { RepoCard } from "@/components/repo-card";
 import { Title } from "@/components/title";
 import { ArrowRightIcon, CreditCardIcon } from "lucide-react";
 import {
@@ -17,6 +16,7 @@ import {
 } from "@/components/page-header";
 import { Section } from "@/components/section";
 import { ThemeImage } from "@/components/image-wrapper";
+import { KitCard } from "@/components/kit-card";
 
 export async function MainSection() {
   const { user } = await validateRequest();
@@ -45,9 +45,9 @@ export async function MainSection() {
       </PageHeader>
       <ThemeImage
         src="/banner-light.png"
+        dark="/banner-dark.png"
         alt="Hero image"
         className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8"
-        dark="/banner-dark.png"
       />
     </Section>
   );
@@ -56,13 +56,9 @@ export async function MainSection() {
 export function StaterKitsSection() {
   return (
     <Section id="kits">
-      <Title
-        title="Starter kits"
-        subtitle="modern, polished stacks"
-        className="flex flex-col items-center"
-      />
+      <Title title="Starter kits" subtitle="modern, polished stacks" />
       <div className="flex w-full flex-col gap-6 py-8 md:grid md:grid-cols-3 md:py-16">
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense>
           <Kits />
         </Suspense>
       </div>
@@ -71,12 +67,12 @@ export function StaterKitsSection() {
 }
 
 async function Kits() {
-  const repos = await getRepos();
+  const kits = await getKits();
 
   return (
     <>
-      {repos.length !== 0 &&
-        repos.map((repo) => <RepoCard key={repo.id} {...repo} />)}
+      {kits.length !== 0 &&
+        kits.map((kit) => <KitCard key={kit.id} {...kit} />)}
     </>
   );
 }

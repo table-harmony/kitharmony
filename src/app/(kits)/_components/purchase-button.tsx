@@ -1,5 +1,4 @@
-import { getRepoByName } from "@/infrastructure/repo";
-import { getPurchaseByUserAndRepo } from "@/infrastructure/purchase";
+import { getPurchaseByUserAndKit } from "@/infrastructure/purchase";
 
 import Link from "next/link";
 
@@ -8,8 +7,9 @@ import { validateRequest } from "@/lib/auth";
 import { PurchaseForm } from "./purchase-form";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, BookIcon } from "lucide-react";
+import { getKitByName } from "@/infrastructure/kit";
 
-export async function PurchaseButton({ repoName }: { repoName: string }) {
+export async function PurchaseButton({ kitName }: { kitName: string }) {
   const { user } = await validateRequest();
 
   if (!user)
@@ -21,24 +21,24 @@ export async function PurchaseButton({ repoName }: { repoName: string }) {
       </Button>
     );
 
-  const repo = await getRepoByName({ name: repoName });
+  const kit = await getKitByName({ name: kitName });
 
-  if (!repo) return;
+  if (!kit) return;
 
-  const purchase = await getPurchaseByUserAndRepo({
+  const purchase = await getPurchaseByUserAndKit({
     userId: user.id,
-    repoId: repo.id,
+    kitId: kit.id,
   });
 
   if (purchase)
     return (
       <Button className="w-72" asChild>
-        <Link href={`/docs/${repo.name}`}>
+        <Link href={`/docs/${kit.name}`}>
           <BookIcon className="mr-2 h-4 w-4" />
           Documentation
         </Link>
       </Button>
     );
 
-  return <PurchaseForm repoId={repo.id} />;
+  return <PurchaseForm kitId={kit.id} />;
 }

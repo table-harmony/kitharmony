@@ -1,6 +1,7 @@
 import { LogoutForm } from "./form";
 import { Section } from "@/components/section";
 import {
+  PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
@@ -15,7 +16,9 @@ export default function LogoutPage() {
           You are about to sign out of your account.
         </PageHeaderDescription>
       </PageHeader>
-      <LogoutForm />
+      <PageActions>
+        <LogoutForm />
+      </PageActions>
     </Section>
   );
 }

@@ -9,7 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { LoaderButton } from "@/components/ui/loader-button";
 import { CreditCardIcon } from "lucide-react";
 
-export function PurchaseForm({ repoId }: { repoId: string }) {
+export function PurchaseForm({ kitId }: { kitId: string }) {
   const { toast } = useToast();
 
   const { execute, status } = useAction(purchaseAction, {
@@ -20,7 +20,7 @@ export function PurchaseForm({ repoId }: { repoId: string }) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    execute({ repoId });
+    execute({ kitId });
   };
 
   return (

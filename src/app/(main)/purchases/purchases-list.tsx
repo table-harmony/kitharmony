@@ -13,7 +13,7 @@ export async function PurchasesList() {
 
   const purchases = await db.purchase.findMany({
     where: { userId: user.id },
-    include: { repo: true },
+    include: { kit: true },
   });
 
   return (
@@ -22,8 +22,8 @@ export async function PurchasesList() {
         <PurchaseItem
           key={purchase.id}
           id={purchase.id}
-          repoName={purchase.repo.name}
-          link={purchase.repo.link}
+          kitName={purchase.kit.name}
+          link={purchase.kit.link}
           createdAt={purchase.createdAt}
         />
       ))}
