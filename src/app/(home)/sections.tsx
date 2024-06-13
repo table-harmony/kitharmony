@@ -8,7 +8,7 @@ import { validateRequest } from "@/lib/auth";
 
 import { Button } from "@/components/ui/button";
 import { Title } from "@/components/title";
-import { ArrowRightIcon, CreditCardIcon } from "lucide-react";
+import { ArrowRightIcon, CreditCardIcon, ShoppingCartIcon } from "lucide-react";
 import {
   PageActions,
   PageHeader,
@@ -33,7 +33,7 @@ export async function MainSection() {
           {user ? (
             <Button className="w-72" asChild>
               <Link href="/purchases">
-                <CreditCardIcon className="mr-2 h-4 w-4" /> purchases
+                <ShoppingCartIcon className="mr-2 h-4 w-4" /> View purchases
               </Link>
             </Button>
           ) : (
