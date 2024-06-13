@@ -5,6 +5,8 @@ import { validateRequest } from "@/lib/auth";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { PurchasesList } from "./purchases-list";
+import { Section } from "@/components/section";
+import { PageHeader, PageHeaderHeading } from "@/components/page-header";
 
 export default async function PurchasesPage() {
   const { user } = await validateRequest();
@@ -12,18 +14,13 @@ export default async function PurchasesPage() {
   if (!user) redirect("/");
 
   return (
-    <div className="container flex flex-col space-y-10 pb-24 pt-12 md:py-20 lg:px-20">
-      <div className="flex flex-col items-center space-y-3">
-        <h1 className="text-balance text-center text-4xl font-bold md:text-5xl lg:text-6xl">
-          Purchases
-        </h1>
-        <p className="max-w-[750px] text-center text-sm text-muted-foreground">
-          View and manage your purchases
-        </p>
-      </div>
+    <Section className="space-y-10">
+      <PageHeader>
+        <PageHeaderHeading>Purchases</PageHeaderHeading>
+      </PageHeader>
       <Suspense fallback={<Skeleton className="h-[150px]" />}>
         <PurchasesList />
       </Suspense>
-    </div>
+    </Section>
   );
 }

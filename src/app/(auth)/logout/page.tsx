@@ -1,15 +1,21 @@
 import { LogoutForm } from "./form";
+import { Section } from "@/components/section";
+import {
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header";
 
 export default function LogoutPage() {
   return (
-    <div className="container relative md:max-w-lg space-y-6">
-      <header className="text-center">
-        <h1 className="text-xl font-medium md:text-3xl">Logout</h1>
-        <p className="text-sm text-muted-foreground">
+    <Section className="space-y-10">
+      <PageHeader>
+        <PageHeaderHeading>Logout</PageHeaderHeading>
+        <PageHeaderDescription>
           You are about to sign out of your account.
-        </p>
-      </header>
+        </PageHeaderDescription>
+      </PageHeader>
       <LogoutForm />
-    </div>
+    </Section>
   );
 }
