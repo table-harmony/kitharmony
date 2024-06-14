@@ -13,7 +13,7 @@ import {
 
 export default function LoginPage() {
   return (
-    <Section>
+    <Section className="space-y-5">
       <PageHeader>
         <PageHeaderHeading className="uppercase">login</PageHeaderHeading>
         <PageHeaderDescription>
@@ -21,7 +21,7 @@ export default function LoginPage() {
         </PageHeaderDescription>
       </PageHeader>
       <PageActions>
-        <Button className="md:w-72" asChild>
+        <Button className="w-72" asChild>
           <Link href="/login/github">
             <GithubIcon className="mr-2 h-4 w-4" />
             <span className="hidden md:block">Sign in with&nbsp;</span> Github

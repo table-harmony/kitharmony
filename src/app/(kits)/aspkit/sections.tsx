@@ -43,7 +43,7 @@ function HeaderSkeleton() {
 
 export function MainSection() {
   return (
-    <Section id="main" className="flex flex-col items-center space-y-10">
+    <Section id="main" className="flex flex-col items-center">
       <Suspense fallback={<HeaderSkeleton />}>
         <Header />
       </Suspense>

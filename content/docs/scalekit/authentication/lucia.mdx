@@ -1,0 +1,173 @@
+---
+title: Lucia
+description: The auth library for your server.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+Lucia abstracts away the complexity of handling sessions.
+It works alongside your database to provide an API that's easy to use, understand, and extend.
+
+<Callout>
+  Visit [lucia](https://lucia-auth.com) documentation for more information
+</Callout>
+
+## Installation
+
+<Tabs items={["npm", "pnpm"]}>
+    <Tab value='npm'>
+
+```bash
+npm install lucia @lucia-auth/adapter-prisma
+```
+
+    </Tab>
+    <Tab value="pnpm">
+
+```bash
+pnpm add lucia @lucia-auth/adapter-prisma
+```
+
+    </Tab>
+
+</Tabs>
+
+## Initialization
+
+Create a file `auth.ts` in your lib folder:
+
+<Files>
+  <Folder name="lib" defaultOpen>
+    <File name="auth.ts" />
+  </Folder>
+</Files>
+
+```typescript title="auth.ts"
+import db from "@/db";
+import { User as DatabaseUser } from "@prisma/client";
+
+import { env } from "@/env";
+
+import { Lucia } from "lucia";
+import type { Session, User } from "lucia";
+import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
+
+const adapter = new PrismaAdapter(db.session, db.user);
+
+export const lucia = new Lucia(adapter, {
+  sessionCookie: {
+    expires: false,
+    attributes: {
+      secure: true,
+    },
+  },
+  getUserAttributes: (attributes) => {
+    return {
+      id: attributes.id,
+      username: attributes.username,
+      picture: attributes.picture,
+      email: attributes.email,
+      emailVerified: attributes.emailVerified,
+    };
+  },
+});
+
+declare module "lucia" {
+  interface Register {
+    Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUser;
+  }
+}
+```
+
+### Create an OAuth App
+
+[Create a Google OAuth app](https://support.google.com/cloud/answer/6158849).
+Set the redirect URI to http://localhost:3000/api/auth/google/callback.
+Copy and paste the client ID and secret to your .env file.
+
+```mdx title="env"
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+```
+
+### Arctic
+
+Arctic is the easiest way to implement OAuth with Lucia and it supports most major providers.
+
+<Tabs items={["npm", "pnpm"]}>
+    <Tab value='npm'>
+
+```bash
+npm install arctic
+```
+
+    </Tab>
+    <Tab value="pnpm">
+
+```bash
+pnpm add arctic
+```
+
+    </Tab>
+
+</Tabs>
+
+Initialize the Google provider with the client ID, secret and callback redirect.
+
+```typescript title="auth.ts"
+import { Google } from "arctic";
+
+export const google = new Google(
+  env.GOOGLE_CLIENT_ID,
+  env.GOOGLE_CLIENT_SECRET,
+  `${env.NEXT_PUBLIC_APP_URL}/api/auth/google/callback`,
+);
+```
+
+### Validate request
+
+Create `validateRequest()`. This will check for the session cookie, validate it, and set a new cookie if necessary.
+
+```typescript title="auth.ts"
+import { cache } from "react";
+import { cookies } from "next/headers";
+
+export const validateRequest = cache(
+  async (): Promise<
+    { user: User; session: Session } | { user: null; session: null }
+  > => {
+    const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+    if (!sessionId) {
+      return {
+        user: null,
+        session: null,
+      };
+    }
+
+    const result = await lucia.validateSession(sessionId);
+    // next.js throws when you attempt to set cookie when rendering page
+    try {
+      if (result.session && result.session.fresh) {
+        const sessionCookie = lucia.createSessionCookie(result.session.id);
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes,
+        );
+      }
+      if (!result.session) {
+        const sessionCookie = lucia.createBlankSessionCookie();
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes,
+        );
+      }
+    } catch {}
+    return result;
+  },
+);
+```

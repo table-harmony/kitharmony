@@ -30,7 +30,7 @@
     "clsx": "^2.1.1",
     "fumadocs-core": "^11.3.2",
     "fumadocs-docgen": "^1.0.2",
-    "fumadocs-mdx": "^8.2.31",
+    "fumadocs-mdx": "^8.2.32",
     "fumadocs-typescript": "^2.0.1",
     "fumadocs-ui": "^11.3.2",
     "lucia": "^3.2.0",

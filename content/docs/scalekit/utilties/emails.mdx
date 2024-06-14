@@ -1,7 +1,6 @@
 ---
 title: Emails
 description: Learn how to send your emails using Resend and React email.
-icon: Mail
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -99,7 +98,7 @@ pnpm add @react-email/components -E
 
 ### Components
 
-Create a folder called `emails` in your components folder:
+Create a folder `emails` in your components folder:
 
 <Files>
   <Folder name="components" defaultOpen>
@@ -113,12 +112,8 @@ Create a folder called `emails` in your components folder:
 
 Create an email component in the emails folder:
 
-```typescript title="demo.tsx"
-import {
-  Body,
-  Html,
-  Text,
-} from "@react-email/components";
+```tsx title="demo.tsx"
+import { Body, Html, Text } from "@react-email/components";
 
 export function DemoEmail() {
   return (

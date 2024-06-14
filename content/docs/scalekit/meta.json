@@ -4,6 +4,13 @@
   "pages": [
     "---Guide---",
     "...",
+    "---Infrastructure---",
+    "...infrastructure",
+    "---Authentication---",
+    "...authentication",
+    "---Utilties---",
+    "...utilties",
+    "---Links---",
     "[GitHub](https://github.com/table-harmony/scalekit)"
   ]
 }
