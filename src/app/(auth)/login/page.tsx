@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { Section } from "@/components/section";
 
 import { GithubIcon } from "lucide-react";
 import {
@@ -13,7 +12,7 @@ import {
 
 export default function LoginPage() {
   return (
-    <Section className="space-y-5">
+    <div>
       <PageHeader>
         <PageHeaderHeading className="uppercase">login</PageHeaderHeading>
         <PageHeaderDescription>
@@ -28,6 +27,6 @@ export default function LoginPage() {
           </Link>
         </Button>
       </PageActions>
-    </Section>
+    </div>
   );
 }

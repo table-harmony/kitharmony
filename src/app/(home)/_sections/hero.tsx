@@ -1,13 +1,16 @@
-import { getKitsUseCase } from "@/infrastructure/kits";
-
-import Link from "next/link";
-import { Suspense } from "react";
-
 import { siteConfig } from "@/config/site";
 import { validateRequest } from "@/lib/auth";
 
+import Link from "next/link";
+
+import { Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
-import { Title } from "@/components/title";
+import {
+  PageActions,
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header";
 import {
   ArrowRightIcon,
   BookIcon,
@@ -15,17 +18,8 @@ import {
   FoldersIcon,
   ShoppingCartIcon,
 } from "lucide-react";
-import {
-  PageActions,
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/page-header";
-import { Section } from "@/components/section";
-import { KitCard } from "@/components/kit-card";
-import { Skeleton } from "@/components/ui/skeleton";
 
-export async function MainSection() {
+export async function HeroSection() {
   const { user } = await validateRequest();
 
   return (
@@ -80,43 +74,5 @@ export async function MainSection() {
         </div>
       </div>
     </Section>
-  );
-}
-
-export function StaterKitsSection() {
-  return (
-    <Section id="kits" className="flex flex-col items-center">
-      <Title
-        title="Starter kits"
-        subtitle="modern, polished stacks"
-        className="text-center"
-      />
-      <div className="flex w-full flex-col gap-6 py-8 md:grid md:grid-cols-3 md:py-16">
-        <Suspense fallback={<KitsSkeleton />}>
-          <Kits />
-        </Suspense>
-      </div>
-    </Section>
-  );
-}
-
-function KitsSkeleton() {
-  return (
-    <>
-      <Skeleton className="h-[300px] w-full" />
-      <Skeleton className="h-[300px] w-full" />
-      <Skeleton className="h-[300px] w-full" />
-    </>
-  );
-}
-
-async function Kits() {
-  const kits = await getKitsUseCase();
-
-  return (
-    <>
-      {kits.length !== 0 &&
-        kits.map((kit) => <KitCard key={kit.id} {...kit} />)}
-    </>
   );
 }

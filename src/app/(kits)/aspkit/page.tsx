@@ -1,9 +1,10 @@
-import { MainSection, PurchaseSection } from "./sections";
+import { HeroSection } from "./_sections/hero";
+import { PurchaseSection } from "./_sections/purchase";
 
 export default function AspkitPage() {
   return (
-    <div className="relative flex flex-col">
-      <MainSection />
+    <div>
+      <HeroSection />
       <PurchaseSection />
     </div>
   );

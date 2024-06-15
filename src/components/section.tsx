@@ -7,7 +7,7 @@ export function Section({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <section
-      className={cn("container px-4 pb-16 pt-4 md:pt-16 lg:px-20", className)}
+      className={cn("container px-4 pb-16 pt-10 md:pt-16 lg:px-20", className)}
       {...props}
     >
       {children}

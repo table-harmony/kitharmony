@@ -36,7 +36,7 @@ export const LogoutForm = () => {
         isLoading={isPending}
         icon={LogOutIcon}
         type="submit"
-        className="md:w-72"
+        className="w-72"
       >
         Logout
       </LoaderButton>
