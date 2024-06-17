@@ -4,11 +4,10 @@ import { validateRequest } from "@/lib/auth";
 
 import { PurchaseItem } from "./purchase-item";
 import Image from "next/image";
-import {
-  NoResult,
-  NoResultContent,
-  NoResultTitle,
-} from "@/components/no-result";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { GithubIcon } from "lucide-react";
 
 export async function PurchasesList() {
   const { user } = await validateRequest();
@@ -20,27 +19,9 @@ export async function PurchasesList() {
   return (
     <>
       {purchases.length === 0 ? (
-        <NoResult>
-          <NoResultTitle>No purchases were commited yet...</NoResultTitle>
-          <NoResultContent>
-            <Image
-              alt="Purchase"
-              width="300"
-              height="300"
-              src="/purchase-light.svg"
-              className="hidden dark:block"
-            />
-            <Image
-              alt="Purchase"
-              width="300"
-              height="300"
-              src="/purchase-dark.svg"
-              className="dark:hidden"
-            />
-          </NoResultContent>
-        </NoResult>
+        <div>No purchases were commited yet...</div>
       ) : (
-        <div className="flex w-full flex-col gap-6 py-8 md:grid md:grid-cols-2 md:py-16">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {purchases.map((purchase) => (
             <PurchaseItem
               key={purchase.id}

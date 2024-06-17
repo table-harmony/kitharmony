@@ -1,5 +1,4 @@
 import { LogoutForm } from "./form";
-import { Section } from "@/components/section";
 import {
   PageActions,
   PageHeader,
@@ -9,7 +8,7 @@ import {
 
 export default function LogoutPage() {
   return (
-    <Section className="space-y-5">
+    <div>
       <PageHeader>
         <PageHeaderHeading className="uppercase">logout</PageHeaderHeading>
         <PageHeaderDescription>
@@ -19,6 +18,6 @@ export default function LogoutPage() {
       <PageActions>
         <LogoutForm />
       </PageActions>
-    </Section>
+    </div>
   );
 }

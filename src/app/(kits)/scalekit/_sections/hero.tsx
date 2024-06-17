@@ -3,21 +3,19 @@ import { getKitByNameUseCase } from "@/infrastructure/kits";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { PurchaseButton } from "../../_components/purchase-button";
+import { KitButton } from "@/components/kit-button";
 
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { Section } from "@/components/section";
-import { ThemeImage } from "@/components/image-wrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CheckIcon } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <Section id="hero" className="flex flex-col items-center space-y-10">
+    <div className="container flex flex-col items-center space-y-10 px-4 py-16 lg:px-20">
       <Suspense fallback={<HeaderSkeleton />}>
         <Header />
       </Suspense>
@@ -46,15 +44,9 @@ export function HeroSection() {
         </li>
       </ul>
       <Suspense fallback={<Skeleton className="h-[50px] w-[300px]" />}>
-        <PurchaseButton kitName="scalekit" />
+        <KitButton kitName="scalekit" />
       </Suspense>
-      <ThemeImage
-        className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8"
-        src="/scalekit/landing/hero-light.png"
-        dark="/scalekit/landing/hero-dark.png"
-        alt="Hero image"
-      />
-    </Section>
+    </div>
   );
 }
 

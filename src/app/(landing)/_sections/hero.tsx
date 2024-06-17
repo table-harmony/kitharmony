@@ -1,9 +1,7 @@
 import { siteConfig } from "@/config/site";
-import { validateRequest } from "@/lib/auth";
 
 import Link from "next/link";
 
-import { Section } from "@/components/section";
 import { Button } from "@/components/ui/button";
 import {
   PageActions,
@@ -18,31 +16,32 @@ import {
   FoldersIcon,
   ShoppingCartIcon,
 } from "lucide-react";
+import { SignedIn } from "@/components/auth/signed-in";
+import { SignedOut } from "@/components/auth/signed-out";
 
-export async function HeroSection() {
-  const { user } = await validateRequest();
-
+export function HeroSection() {
   return (
-    <Section className="space-y-5">
+    <div className="container px-4 py-16 lg:px-20">
       <PageHeader className="space-y-5">
         <PageHeaderHeading className="max-w-[980px] text-balance text-4xl font-bold md:text-6xl lg:text-7xl">
           Modern, fully built and polished stacks
         </PageHeaderHeading>
         <PageHeaderDescription>{siteConfig.description}</PageHeaderDescription>
         <PageActions>
-          {user ? (
+          <SignedIn>
             <Button className="w-72" asChild>
               <Link href="/purchases">
                 <ShoppingCartIcon className="mr-2 h-4 w-4" /> View purchases
               </Link>
             </Button>
-          ) : (
+          </SignedIn>
+          <SignedOut>
             <Button asChild className="w-72">
               <Link href="/login">
                 Get started <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          )}
+          </SignedOut>
         </PageActions>
       </PageHeader>
       <div className="mt-8 grid w-full grid-cols-1 gap-4 md:mt-24 md:grid-cols-3">
@@ -73,6 +72,6 @@ export async function HeroSection() {
           </p>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }

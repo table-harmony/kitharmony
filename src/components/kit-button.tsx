@@ -5,21 +5,15 @@ import Link from "next/link";
 
 import { validateRequest } from "@/lib/auth";
 
-import { PurchaseForm } from "./purchase-form";
 import { Button } from "@/components/ui/button";
+import { SignedIn } from "@/components/auth/signed-in";
+import { SignedOut } from "@/components/auth/signed-out";
 import { ArrowRightIcon, BookIcon } from "lucide-react";
 
-export async function PurchaseButton({ kitName }: { kitName: string }) {
+async function Purchase({ kitName }: { kitName: string }) {
   const { user } = await validateRequest();
 
-  if (!user)
-    return (
-      <Button asChild className="w-72">
-        <Link href="/login">
-          Get Started <ArrowRightIcon className="ml-2 h-4 w-4" />
-        </Link>
-      </Button>
-    );
+  if (!user) return;
 
   const kit = await getKitByNameUseCase({ name: kitName });
 
@@ -40,5 +34,26 @@ export async function PurchaseButton({ kitName }: { kitName: string }) {
       </Button>
     );
 
-  return <PurchaseForm kitName={kit.name} />;
+  return (
+    <Button className="w-72" asChild>
+      <Link href={`/api/purchase?kit=${kit.name}`}>Purchase</Link>
+    </Button>
+  );
+}
+
+export function KitButton({ kitName }: { kitName: string }) {
+  return (
+    <>
+      <SignedIn>
+        <Purchase kitName={kitName} />
+      </SignedIn>
+      <SignedOut>
+        <Button asChild className="w-72">
+          <Link href="/login">
+            Get Started <ArrowRightIcon className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </SignedOut>
+    </>
+  );
 }

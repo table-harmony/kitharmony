@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { validateRequest } from "@/lib/auth";
 
 import { PurchasesList } from "./purchases-list";
-import { Section } from "@/components/section";
 import { PageHeader, PageHeaderHeading } from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -14,14 +13,14 @@ export default async function PurchasesPage() {
   if (!user) redirect("/");
 
   return (
-    <Section className="space-y-10">
+    <div className="container space-y-10 px-4 py-16 lg:px-20">
       <PageHeader>
         <PageHeaderHeading className="uppercase">purchases</PageHeaderHeading>
       </PageHeader>
       <Suspense fallback={<PurchasesSkeleton />}>
         <PurchasesList />
       </Suspense>
-    </Section>
+    </div>
   );
 }
 

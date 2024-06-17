@@ -5,9 +5,10 @@ import { useTransition } from "react";
 import { logoutAction } from "./actions";
 
 import { useToast } from "@/components/ui/use-toast";
-import { LoaderButton } from "@/components/ui/loader-button";
+import { LoaderButton } from "@/components/loader-button";
 
 import { LogOutIcon } from "lucide-react";
+import { SubmitButton } from "@/components/submit-button";
 
 export const LogoutForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -32,14 +33,7 @@ export const LogoutForm = () => {
 
   return (
     <form action={onSubmit}>
-      <LoaderButton
-        isLoading={isPending}
-        icon={LogOutIcon}
-        type="submit"
-        className="w-72"
-      >
-        Logout
-      </LoaderButton>
+      <SubmitButton className="w-72">Logout</SubmitButton>
     </form>
   );
 };

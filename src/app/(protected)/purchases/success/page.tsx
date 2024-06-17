@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Section } from "@/components/section";
 import {
   PageActions,
   PageHeader,
@@ -11,7 +10,7 @@ import { ShoppingCartIcon } from "lucide-react";
 
 export default function SuccessPage() {
   return (
-    <Section>
+    <div className="container px-4 py-16 lg:px-20">
       <PageHeader>
         <PageHeaderHeading className="uppercase">
           purchase successful
@@ -27,6 +26,6 @@ export default function SuccessPage() {
           </Button>
         </PageActions>
       </PageHeader>
-    </Section>
+    </div>
   );
 }
