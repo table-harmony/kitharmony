@@ -18,14 +18,20 @@ interface ThemeImageProps extends ImageProps {
   dark: string;
 }
 
-export function ThemeImage({ src, alt, className, dark }: ThemeImageProps) {
+export function ThemeImage({
+  src,
+  alt,
+  className,
+  dark,
+  ...props
+}: ThemeImageProps) {
   return (
     <>
       <ImageWrapper className={cn("dark:hidden", className)}>
-        <Image src={src} alt={alt} width="1222" height="636" />
+        <Image src={src} alt={alt} {...props} />
       </ImageWrapper>
       <ImageWrapper className={cn("hidden dark:block", className)}>
-        <Image src={dark} alt={alt} width="1222" height="636" />
+        <Image src={dark} alt={alt} {...props} />
       </ImageWrapper>
     </>
   );

@@ -4,7 +4,7 @@ import { PurchaseSection } from "./_sections/purchase";
 
 export default function ScaleKitPage() {
   return (
-    <div>
+    <div className="space-y-10">
       <HeroSection />
       <FeaturesSection />
       <PurchaseSection />

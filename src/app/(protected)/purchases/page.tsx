@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { validateRequest } from "@/lib/auth";
 
-import { PurchasesList } from "./purchases-list";
+import { PurchasesList, PurchasesListSkeleton } from "./list";
 import { PageHeader, PageHeaderHeading } from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -17,18 +17,9 @@ export default async function PurchasesPage() {
       <PageHeader>
         <PageHeaderHeading className="uppercase">purchases</PageHeaderHeading>
       </PageHeader>
-      <Suspense fallback={<PurchasesSkeleton />}>
+      <Suspense fallback={<PurchasesListSkeleton />}>
         <PurchasesList />
       </Suspense>
-    </div>
-  );
-}
-
-function PurchasesSkeleton() {
-  return (
-    <div className="flex w-full flex-col gap-6 py-8 md:grid md:grid-cols-2 md:py-16">
-      <Skeleton className="h-[300px]" />
-      <Skeleton className="h-[300px]" />
     </div>
   );
 }

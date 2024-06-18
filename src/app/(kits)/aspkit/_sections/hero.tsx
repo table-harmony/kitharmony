@@ -1,6 +1,7 @@
 import { getKitByNameUseCase } from "@/infrastructure/kits";
 
 import { Suspense } from "react";
+import Image from "next/image";
 
 import {
   PageActions,
@@ -10,14 +11,23 @@ import {
 } from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { KitButton } from "@/components/kit-button";
+import { ImageWrapper } from "@/components/image-wrapper";
 
 export function HeroSection() {
   return (
-    <div className="container space-y-10 px-4 py-16 lg:px-20">
+    <section className="container space-y-5 px-4 py-16 lg:px-20">
       <Suspense fallback={<HeaderSkeleton />}>
         <Header />
       </Suspense>
-    </div>
+      <ImageWrapper className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8">
+        <Image
+          src="/aspkit/hero.png"
+          alt="Hero image"
+          width="1222"
+          height="636"
+        />
+      </ImageWrapper>
+    </section>
   );
 }
 

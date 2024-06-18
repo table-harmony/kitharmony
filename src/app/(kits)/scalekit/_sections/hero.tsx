@@ -12,10 +12,11 @@ import {
 } from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CheckIcon } from "lucide-react";
+import { ThemeImage } from "@/components/image-wrapper";
 
 export function HeroSection() {
   return (
-    <div className="container flex flex-col items-center space-y-10 px-4 py-16 lg:px-20">
+    <section className="container flex flex-col items-center space-y-10 px-4 py-16 lg:px-20">
       <Suspense fallback={<HeaderSkeleton />}>
         <Header />
       </Suspense>
@@ -46,7 +47,15 @@ export function HeroSection() {
       <Suspense fallback={<Skeleton className="h-[50px] w-[300px]" />}>
         <KitButton kitName="scalekit" />
       </Suspense>
-    </div>
+      <ThemeImage
+        className="max-w-6xl px-6 pt-8 sm:max-w-4xl md:max-w-screen-xl lg:px-8"
+        src="/scalekit/landing/hero-light.png"
+        dark="/scalekit/landing/hero-dark.png"
+        alt="Hero image"
+        width="1222"
+        height="636"
+      />
+    </section>
   );
 }
 

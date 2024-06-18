@@ -21,7 +21,7 @@ import { SignedOut } from "@/components/auth/signed-out";
 
 export function HeroSection() {
   return (
-    <div className="container px-4 py-16 lg:px-20">
+    <div className="container space-y-10 px-4 py-16 lg:px-20">
       <PageHeader className="space-y-5">
         <PageHeaderHeading className="max-w-[980px] text-balance text-4xl font-bold md:text-6xl lg:text-7xl">
           Modern, fully built and polished stacks
@@ -44,7 +44,7 @@ export function HeroSection() {
           </SignedOut>
         </PageActions>
       </PageHeader>
-      <div className="mt-8 grid w-full grid-cols-1 gap-4 md:mt-24 md:grid-cols-3">
+      <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex flex-col space-y-2 p-4 md:p-6">
           <div className="flex items-center">
             <FoldersIcon className="mr-2 h-6 w-6 text-primary" />

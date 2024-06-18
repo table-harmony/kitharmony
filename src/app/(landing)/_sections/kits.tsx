@@ -5,17 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { Title } from "@/components/title";
 
 export function KitsSection() {
   return (
     <div className="container space-y-10 px-4 py-16 lg:px-20">
-      <div className="flex flex-col items-center">
-        <h2 className="max-w-lg text-2xl font-bold uppercase text-primary md:text-4xl">
-          Starter kits
-        </h2>
-        <p className="mb-2 font-semibold">modern polished stacks</p>
-      </div>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <Title
+        title="starter kits"
+        subtitle="Modern polished stacks"
+        className="flex flex-col items-center"
+      />
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
         <Suspense fallback={<KitsSkeleton />}>
           <Kits />
         </Suspense>
@@ -43,7 +43,7 @@ async function Kits() {
         <Link
           key={kit.id}
           href={kit.name}
-          className="cursor-pointer rounded-lg border p-4 hover:border-black hover:duration-200"
+          className="cursor-pointer rounded-lg border p-4 hover:border-primary hover:duration-200"
         >
           <div className="flex flex-row items-center space-x-4">
             <Image alt="Kit picture" src={kit.picture} width="50" height="50" />
