@@ -5,10 +5,11 @@ import Link from "next/link";
 
 import { validateRequest } from "@/lib/auth";
 
+import { PurchaseForm } from "./purchase-form";
 import { Button } from "@/components/ui/button";
 import { SignedIn } from "@/components/auth/signed-in";
 import { SignedOut } from "@/components/auth/signed-out";
-import { ArrowRightIcon, BookIcon, CreditCardIcon } from "lucide-react";
+import { ArrowRightIcon, BookIcon } from "lucide-react";
 
 async function PurchaseButton({ kitName }: { kitName: string }) {
   const { user } = await validateRequest();
@@ -34,13 +35,7 @@ async function PurchaseButton({ kitName }: { kitName: string }) {
       </Button>
     );
 
-  return (
-    <Button className="w-72" asChild>
-      <Link href={`/api/purchase?kit=${kit.name}`}>
-        <CreditCardIcon className="mr-2 h-4 w-4" /> Purchase
-      </Link>
-    </Button>
-  );
+  return <PurchaseForm kitName={kit.name} />;
 }
 
 export function KitButton({ kitName }: { kitName: string }) {

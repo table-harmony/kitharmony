@@ -15,11 +15,9 @@ export function KitsSection() {
         subtitle="Modern polished stacks"
         className="flex flex-col items-center"
       />
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
-        <Suspense fallback={<KitsSkeleton />}>
-          <Kits />
-        </Suspense>
-      </div>
+      <Suspense fallback={<KitsSkeleton />}>
+        <Kits />
+      </Suspense>
     </div>
   );
 }
@@ -38,7 +36,7 @@ async function Kits() {
   const kits = await getKitsUseCase();
 
   return (
-    <>
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
       {kits.map((kit) => (
         <Link
           key={kit.id}
@@ -48,7 +46,9 @@ async function Kits() {
           <div className="flex flex-row items-center space-x-4">
             <Image alt="Kit picture" src={kit.picture} width="50" height="50" />
             <div className="flex flex-col overflow-hidden">
-              <span className="font-bold uppercase">{kit.name}</span>
+              <span className="font-bold uppercase text-primary">
+                {kit.name}
+              </span>
               <span className="line-clamp -2 text-sm text-muted-foreground">
                 {kit.description}
               </span>
@@ -56,6 +56,6 @@ async function Kits() {
           </div>
         </Link>
       ))}
-    </>
+    </div>
   );
 }

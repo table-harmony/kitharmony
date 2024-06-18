@@ -3,7 +3,7 @@ import { getKitByNameUseCase } from "@/infrastructure/kits";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { KitButton } from "@/components/kit-button";
+import { KitButton } from "../../_components/kit-button";
 
 import {
   PageHeader,

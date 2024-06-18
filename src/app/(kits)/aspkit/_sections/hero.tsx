@@ -10,7 +10,7 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
-import { KitButton } from "@/components/kit-button";
+import { KitButton } from "../../_components/kit-button";
 import { ImageWrapper } from "@/components/image-wrapper";
 
 export function HeroSection() {

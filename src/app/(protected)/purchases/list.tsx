@@ -52,13 +52,13 @@ export function PurchaseItem({ kitName, link, createdAt }: PurchaseItemProps) {
           </Link>
         </Button>
         <div className="flex flex-col overflow-hidden">
-          <span className="font-bold uppercase">{kitName}</span>
+          <span className="font-bold uppercase text-primary">{kitName}</span>
           <span className="line-clamp -2 text-sm text-muted-foreground">
             {createdAt.toLocaleDateString()}
           </span>
         </div>
       </div>
-      <Button variant="secondary" asChild>
+      <Button variant="outline" asChild>
         <Link href={"/docs/" + kitName}>
           <BookIcon className="mr-2 h-4 w-4" /> Documentation
         </Link>

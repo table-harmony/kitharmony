@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { KitButton } from "@/components/kit-button";
+import { KitButton } from "../../_components/kit-button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Title } from "@/components/title";
 

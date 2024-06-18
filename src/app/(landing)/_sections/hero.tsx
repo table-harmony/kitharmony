@@ -44,33 +44,37 @@ export function HeroSection() {
           </SignedOut>
         </PageActions>
       </PageHeader>
-      <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3">
-        <div className="flex flex-col space-y-2 p-4 md:p-6">
-          <div className="flex items-center">
-            <FoldersIcon className="mr-2 h-6 w-6 text-primary" />
-            <span className="text-lg font-semibold">Resources</span>
-          </div>
-          <p>
-            The starter kits will enable you to setup your own SaaS product.
-          </p>
+      <Features />
+    </div>
+  );
+}
+
+function Features() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="flex flex-col space-y-2 p-4 md:p-6">
+        <div className="flex items-center">
+          <FoldersIcon className="mr-2 h-6 w-6 text-primary" />
+          <span className="text-lg font-semibold">Resources</span>
         </div>
-        <div className="flex flex-col space-y-2 p-4 md:p-6">
-          <div className="flex items-center">
-            <CreditCardIcon className="mr-2 h-6 w-6 text-primary" />
-            <span className="text-lg font-semibold">Purchases</span>
-          </div>
-          <p>Access to starter kit repository code and documentation.</p>
+        <p>The starter kits will enable you to setup your own SaaS product.</p>
+      </div>
+      <div className="flex flex-col space-y-2 p-4 md:p-6">
+        <div className="flex items-center">
+          <CreditCardIcon className="mr-2 h-6 w-6 text-primary" />
+          <span className="text-lg font-semibold">Purchases</span>
         </div>
-        <div className="flex flex-col space-y-2 p-4 md:p-6">
-          <div className="flex items-center">
-            <BookIcon className="mr-2 h-6 w-6 text-primary" />
-            <span className="text-lg font-semibold">Documentation</span>
-          </div>
-          <p>
-            Including a complete walkthrough on how to set the starter kits up
-            and maintain them.
-          </p>
+        <p>Access to starter kit repository code and documentation.</p>
+      </div>
+      <div className="flex flex-col space-y-2 p-4 md:p-6">
+        <div className="flex items-center">
+          <BookIcon className="mr-2 h-6 w-6 text-primary" />
+          <span className="text-lg font-semibold">Documentation</span>
         </div>
+        <p>
+          Including a complete walkthrough on how to set the starter kits up and
+          maintain them.
+        </p>
       </div>
     </div>
   );
