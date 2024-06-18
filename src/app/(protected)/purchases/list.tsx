@@ -45,7 +45,7 @@ export function PurchaseItem({ kitName, link, createdAt }: PurchaseItemProps) {
   return (
     <div className="flex flex-col space-y-5 rounded-lg border p-4">
       <div className="flex flex-row items-center space-x-4">
-        <Button size="icon" asChild>
+        <Button size="icon" variant="secondary" asChild>
           <Link href={link} target="_blank" rel="noreferrer">
             <span className="sr-only">github</span>
             <GithubIcon className="h-4 w-4" />
