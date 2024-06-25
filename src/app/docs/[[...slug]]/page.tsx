@@ -1,9 +1,4 @@
-import { getKitByNameUseCase } from "@/infrastructure/kits";
-import { getPurchaseUseCase } from "@/infrastructure/purchases";
-
-import { notFound, redirect } from "next/navigation";
-
-import { validateRequest } from "@/lib/auth";
+import { notFound } from "next/navigation";
 
 import { createMetadata } from "@/utils/metadata";
 import { getPage, getPages } from "@/utils/source";
@@ -11,12 +6,8 @@ import { DocsPage, DocsBody } from "fumadocs-ui/page";
 import { RollButton } from "fumadocs-ui/components/roll-button";
 import { ExternalLinkIcon } from "lucide-react";
 
-export default async function Page({
-  params,
-}: {
-  params: { slug?: string[] };
-}) {
-  await getPurchaseFromParams(params);
+export default function Page({ params }: { params: { slug?: string[] } }) {
+  //TODO: restirct access from users who havent bought the kit
 
   const page = getPage(params.slug);
 
@@ -25,7 +16,7 @@ export default async function Page({
   }
 
   const MDX = page.data.exports.default;
-  const path = `content/docs/${page.file.path}`;
+  const path = `https://github.com/table-harmony/kitharmony/blob/master/content/docs/${page.file.path}`;
 
   return (
     <DocsPage
@@ -35,7 +26,7 @@ export default async function Page({
         enabled: page.data.toc,
         footer: (
           <a
-            href={`https://github.com/table-harmony/kitharmony/blob/master/${path}`}
+            href={path}
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
@@ -57,25 +48,6 @@ export default async function Page({
       </DocsBody>
     </DocsPage>
   );
-}
-
-async function getPurchaseFromParams(params: { slug?: string[] }) {
-  const { user } = await validateRequest();
-
-  if (!user) redirect("/");
-
-  const kitName = params.slug?.at(0);
-
-  const kit = await getKitByNameUseCase({ name: kitName ?? "" });
-
-  if (!kit) redirect("/");
-
-  const purchase = await getPurchaseUseCase({
-    userId: user.id,
-    kitId: kit.id,
-  });
-
-  if (!purchase) redirect("/");
 }
 
 export async function generateStaticParams() {
