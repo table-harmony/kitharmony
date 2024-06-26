@@ -15,7 +15,15 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn-1.webcatalog.io",
+        hostname: "w7.pngwing.com",
+      },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn4.iconfinder.com",
       },
     ],
   },
