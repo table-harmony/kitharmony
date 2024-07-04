@@ -5,7 +5,6 @@ import { validateRequest } from "@/lib/auth";
 
 import { PurchasesList, PurchasesListSkeleton } from "./list";
 import { PageHeader, PageHeaderHeading } from "@/components/page-header";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function PurchasesPage() {
   const { user } = await validateRequest();

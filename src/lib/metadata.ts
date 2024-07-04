@@ -1,5 +1,7 @@
 import { env } from "@/env";
 
+import { siteConfig } from "@/config/site";
+
 import type { Metadata } from "next/types";
 
 export function createMetadata(override: Metadata): Metadata {
@@ -10,13 +12,13 @@ export function createMetadata(override: Metadata): Metadata {
       description: override.description ?? undefined,
       url: env.NEXT_PUBLIC_APP_URL,
       images: "/banner.png",
-      siteName: "Kitharmony",
+      siteName: siteConfig.name,
       ...override.openGraph,
     },
   };
 }
 
-export const baseUrl =
+export const BASE_URL =
   env.NODE_ENV === "development"
-    ? new URL("http://localhost:3000")
-    : new URL(env.NEXT_PUBLIC_APP_URL);
+    ? "http://localhost:3000"
+    : env.NEXT_PUBLIC_APP_URL;

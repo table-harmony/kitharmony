@@ -5,6 +5,8 @@ import { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
 
 import { cn } from "@/lib/utils";
+import { BASE_URL } from "@/lib/metadata";
+
 import { ContextProvider } from "@/components/context-provider";
 
 const fontSans = FontSans({
@@ -15,7 +17,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(BASE_URL),
 };
 
 export const viewport: Viewport = {
@@ -32,12 +34,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="kAyOrirRXtGpJ5SfQjkgmlcnOqzuzsXZmAWZLtQHxWc"
-        />
-      </head>
+      <head />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 
-import { createMetadata } from "@/utils/metadata";
-import { getPage, getPages } from "@/utils/source";
+import { createMetadata } from "@/lib/metadata";
+import { getPage, getPages } from "@/lib/source";
+
 import { DocsPage, DocsBody } from "fumadocs-ui/page";
 import { RollButton } from "fumadocs-ui/components/roll-button";
+
 import { ExternalLinkIcon } from "lucide-react";
 
 export default function Page({ params }: { params: { slug?: string[] } }) {

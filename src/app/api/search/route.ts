@@ -1,4 +1,5 @@
-import { getPages } from "@/utils/source";
+import { getPages } from "@/lib/source";
+
 import { createSearchAPI } from "fumadocs-core/search/server";
 
 //TODO: restrict access to pages from a kit user is not currently on.

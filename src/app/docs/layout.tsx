@@ -1,7 +1,8 @@
 import { siteConfig } from "@/config/site";
 
+import { pageTree } from "@/lib/source";
+
 import { DocsLayout } from "fumadocs-ui/layout";
-import { pageTree } from "@/utils/source";
 import { RootProvider } from "fumadocs-ui/provider";
 
 export default async function RootDocsLayout({
