@@ -9,7 +9,7 @@ const withMDX = createMDX({
 });
 
 /** @type {import('next').NextConfig} */
-const config = {
+const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -29,4 +29,10 @@ const config = {
   },
 };
 
-export default withMDX(config);
+import withPWA from "next-pwa";
+
+const pwaConfig = withPWA({
+  dest: "public",
+});
+
+export default pwaConfig(withMDX(nextConfig));
