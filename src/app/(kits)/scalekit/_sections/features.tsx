@@ -3,7 +3,7 @@ import { Title } from "@/components/title";
 
 export function FeaturesSection() {
   return (
-    <section className="spx-4 container lg:px-20">
+    <section className="container px-4 lg:px-20">
       <Title
         title="features"
         subtitle="Polished, end-to-end features needed in every saas"

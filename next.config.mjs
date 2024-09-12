@@ -32,7 +32,7 @@ const nextConfig = {
 import withPWA from "next-pwa";
 
 const pwaConfig = withPWA({
-  dest: "public",
+  dest: "public/pwa",
 });
 
 export default pwaConfig(withMDX(nextConfig));
